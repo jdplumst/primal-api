@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using server.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 DotNetEnv.Env.Load();
+
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL")));
 
 var app = builder.Build();
 
