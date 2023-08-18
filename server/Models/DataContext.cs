@@ -13,7 +13,7 @@ namespace server.Models
         public required DbSet<EggGroup> EggGroup { get; set; }
         public required DbSet<Diet> Diet { get; set; }
         public required DbSet<Habitat> Habitat { get; set; }
-        public required DbSet<Proficiency> Prociciency { get; set; }
+        public required DbSet<Proficiency> Proficiency { get; set; }
         public required DbSet<Skill> Skill { get; set; }
         public required DbSet<Passive> Passive { get; set; }
         public required DbSet<Move> Move { get; set; }
