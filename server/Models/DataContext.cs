@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace server.Models
 {
@@ -18,5 +19,14 @@ namespace server.Models
         public required DbSet<Passive> Passive { get; set; }
         public required DbSet<Move> Move { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Passive>()
+                .Property(p => p.Type)
+                .HasConversion(new EnumToStringConverter<PassiveType>());
+        }
+
     }
+
 }
