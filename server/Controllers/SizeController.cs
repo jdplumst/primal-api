@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using server.Dto;
-using server.Models;
+using server.Interfaces;
 using server.Queries;
 
 namespace server.Controllers
@@ -9,83 +9,53 @@ namespace server.Controllers
     [Route("/api/size")]
     public class SizeController : ControllerBase
     {
-        private readonly DataContext _dataContext;
+        private readonly ISizeRepository _sizeRepository;
+        private readonly IPokemonRepository _pokeRepository;
+        private readonly IResourceMaker _resourceMaker;
 
-        public SizeController(DataContext dataContext)
+        public SizeController(ISizeRepository sizeRepository, IPokemonRepository pokeRepository, IResourceMaker resourceMaker)
         {
-            _dataContext = dataContext;
+            _sizeRepository = sizeRepository;
+            _pokeRepository = pokeRepository;
+            _resourceMaker = resourceMaker;
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(SizeDto))]
         public IActionResult GetSize(int id)
         {
-            var size = _dataContext.Size.Find(id);
+            var size = _sizeRepository.GetSize(id);
             if (size == null)
             {
                 return NotFound();
             }
-            var sizeDto = new SizeDto();
-            sizeDto.Id = id;
-            sizeDto.Name = size.Name;
-            sizeDto.Space = size.Space;
-            sizeDto.Pokemon = new List<PokemonResourceDto>();
-            var pokemon = _dataContext.Pokemon.Where(p => p.SizeId == id);
+            var pokemonList = new List<ResourceDto>();
+            var pokemon = _pokeRepository.GetPokemonBySize(id);
             foreach (var p in pokemon)
             {
-                var pokemonResourceDto = new PokemonResourceDto();
-                pokemonResourceDto.Name = p.Name;
-                pokemonResourceDto.Url =
-                    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development"
-                  ? Environment.GetEnvironmentVariable("DEV_SERVER_URL") + "/pokemon/" + p.Id
-                  : Environment.GetEnvironmentVariable("PROD_SERVER_URL") + "/pokemon/" + p.Id;
-                sizeDto.Pokemon.Add(pokemonResourceDto);
+                var resource = _resourceMaker.CreatePokemonResource(p);
+                pokemonList.Add(resource);
             }
-            return Ok(sizeDto);
+            return Ok(new SizeDto(id, size.Name, size.Space, pokemonList));
         }
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(PageDto<SizeDto>))]
-        public IActionResult GetAllSizes([FromQuery] PaginationQuery paginationQuery)
+        public IActionResult GetSizes([FromQuery] PaginationQuery paginationQuery)
         {
-            var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            var sizes = _dataContext.Size.Skip(skip).Take(paginationQuery.PageSize).ToList();
+            var sizes = _sizeRepository.GetSizes(paginationQuery);
             var sizeDtos = new List<SizeDto>();
             foreach (var size in sizes)
             {
-                var sizeDto = new SizeDto();
-                sizeDto.Id = size.Id;
-                sizeDto.Name = size.Name;
-                sizeDto.Space = size.Space;
-                sizeDto.Pokemon = new List<PokemonResourceDto>();
-                var pokemon = _dataContext.Pokemon.Where(p => p.SizeId == size.Id);
+                var pokemonResources = new List<ResourceDto>();
+                var pokemon = _pokeRepository.GetPokemonBySize(size.Id);
                 foreach (var p in pokemon)
                 {
-                    var pokemonResourceDto = new PokemonResourceDto();
-                    pokemonResourceDto.Name = p.Name;
-                    pokemonResourceDto.Url =
-                        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development"
-                      ? Environment.GetEnvironmentVariable("DEV_SERVER_URL") + "/pokemon/" + p.Id
-                      : Environment.GetEnvironmentVariable("PROD_SERVER_URL") + "/pokemon/" + p.Id;
-                    sizeDto.Pokemon.Add(pokemonResourceDto);
+                    pokemonResources.Add(_resourceMaker.CreatePokemonResource(p));
                 }
-                sizeDtos.Add(sizeDto);
+                sizeDtos.Add(new SizeDto(size.Id, size.Name, size.Space, pokemonResources));
             }
-            var info = new InfoDto(paginationQuery.PageNumber, paginationQuery.PageSize);
-            if (paginationQuery.PageNumber > 1)
-            {
-                info.PreviousPage =
-                        Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development"
-                      ? Environment.GetEnvironmentVariable("DEV_SERVER_URL") + "/size?pageNumber=" + (paginationQuery.PageNumber - 1) + "&pageSize=" + paginationQuery.PageSize
-                      : Environment.GetEnvironmentVariable("PROD_SERVER_URL") + "/size?pageNumber=" + (paginationQuery.PageNumber - 1) + "&pageSize=" + paginationQuery.PageSize;
-            }
-            if (skip + paginationQuery.PageSize < _dataContext.Size.Count())
-            {
-                info.NextPage =
-                    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development"
-                      ? Environment.GetEnvironmentVariable("DEV_SERVER_URL") + "/size?pageNumber=" + (paginationQuery.PageNumber + 1) + "&pageSize=" + paginationQuery.PageSize
-                      : Environment.GetEnvironmentVariable("PROD_SERVER_URL") + "/size?pageNumber=" + (paginationQuery.PageNumber + 1) + "&pageSize=" + paginationQuery.PageSize;
-            }
+            var info = new InfoDto(paginationQuery.PageNumber, paginationQuery.PageSize, _sizeRepository.GetSizeCount());
             var pageDto = new PageDto<ICollection<SizeDto>>(sizeDtos, info);
             return Ok(pageDto);
         }
