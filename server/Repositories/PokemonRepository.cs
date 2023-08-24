@@ -14,12 +14,12 @@ namespace server.Repositories
 
         public ICollection<Pokemon> GetPokemonBySize(int sizeId)
         {
-            return _context.Pokemon.Where(p => p.SizeId == sizeId).ToList();
+            return _context.Pokemon.Where(p => p.SizeId == sizeId).OrderBy(p => p.Id).ToList();
         }
 
         public ICollection<Pokemon> GetPokemonByHabitat(int habitatId)
         {
-            return _context.Pokemon.Where(p => p.Habitat.Any(h => h.Id == habitatId)).ToList();
+            return _context.Pokemon.Where(p => p.Habitat.Any(h => h.Id == habitatId)).OrderBy(p => p.Id).ToList();
         }
     }
 }

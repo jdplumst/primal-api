@@ -40,7 +40,7 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(PageDto<SizeDto>))]
+        [ProducesResponseType(200, Type = typeof(PageDto<ICollection<SizeDto>>))]
         public IActionResult GetSizes([FromQuery] PaginationQuery paginationQuery)
         {
             var sizes = _sizeRepository.GetSizes(paginationQuery);

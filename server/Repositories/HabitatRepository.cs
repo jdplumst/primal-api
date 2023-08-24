@@ -21,7 +21,7 @@ namespace server.Repositories
         public ICollection<Habitat> GetHabitats(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.Habitat.Skip(skip).Take(paginationQuery.PageSize).ToList();
+            return _context.Habitat.Skip(skip).Take(paginationQuery.PageSize).OrderBy(h => h.Id).ToList();
         }
 
         public int GetHabitatCount()
