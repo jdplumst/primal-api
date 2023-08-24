@@ -17,5 +17,9 @@ namespace server.Repositories
             return _context.Pokemon.Where(p => p.SizeId == sizeId).ToList();
         }
 
+        public ICollection<Pokemon> GetPokemonByHabitat(int habitatId)
+        {
+            return _context.Pokemon.Where(p => p.Habitat.Any(h => h.Id == habitatId)).ToList();
+        }
     }
 }

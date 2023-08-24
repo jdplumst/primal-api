@@ -10,13 +10,13 @@ namespace server.Controllers
     public class SizeController : ControllerBase
     {
         private readonly ISizeRepository _sizeRepository;
-        private readonly IPokemonRepository _pokeRepository;
+        private readonly IPokemonRepository _pokemonRepository;
         private readonly IResourceMaker _resourceMaker;
 
-        public SizeController(ISizeRepository sizeRepository, IPokemonRepository pokeRepository, IResourceMaker resourceMaker)
+        public SizeController(ISizeRepository sizeRepository, IPokemonRepository pokemonRepository, IResourceMaker resourceMaker)
         {
             _sizeRepository = sizeRepository;
-            _pokeRepository = pokeRepository;
+            _pokemonRepository = pokemonRepository;
             _resourceMaker = resourceMaker;
         }
 
@@ -30,7 +30,7 @@ namespace server.Controllers
                 return NotFound();
             }
             var pokemonList = new List<ResourceDto>();
-            var pokemon = _pokeRepository.GetPokemonBySize(id);
+            var pokemon = _pokemonRepository.GetPokemonBySize(id);
             foreach (var p in pokemon)
             {
                 var resource = _resourceMaker.CreatePokemonResource(p);
@@ -48,7 +48,7 @@ namespace server.Controllers
             foreach (var size in sizes)
             {
                 var pokemonResources = new List<ResourceDto>();
-                var pokemon = _pokeRepository.GetPokemonBySize(size.Id);
+                var pokemon = _pokemonRepository.GetPokemonBySize(size.Id);
                 foreach (var p in pokemon)
                 {
                     pokemonResources.Add(_resourceMaker.CreatePokemonResource(p));
