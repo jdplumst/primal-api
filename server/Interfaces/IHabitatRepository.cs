@@ -5,7 +5,8 @@ namespace server.Interfaces
 {
     public interface IHabitatRepository
     {
-        Habitat GetHabitat(int id);
+        Habitat? GetHabitatById(int id);
+        Habitat? GetHabitatByName(string name);
         ICollection<Habitat> GetHabitats(PaginationQuery paginationQuery);
         int GetHabitatCount();
     }

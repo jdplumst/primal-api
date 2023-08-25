@@ -5,6 +5,7 @@ namespace server.Interfaces
     public interface IPokemonRepository
     {
         ICollection<Pokemon> GetPokemonBySize(int sizeId);
-        ICollection<Pokemon> GetPokemonByHabitat(int habitatId);
+        ICollection<Pokemon> GetPokemonByHabitatId(int habitatId);
+        ICollection<Pokemon> GetPokemonByHabitatName(string name);
     }
 }

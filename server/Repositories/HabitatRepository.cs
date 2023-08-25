@@ -13,9 +13,14 @@ namespace server.Repositories
             _context = dataContext;
         }
 
-        public Habitat GetHabitat(int id)
+        public Habitat? GetHabitatById(int id)
         {
             return _context.Habitat.Find(id);
+        }
+
+        public Habitat? GetHabitatByName(string name)
+        {
+            return _context.Habitat.Where(h => h.Name.ToLower() == name.ToLower()).FirstOrDefault();
         }
 
         public ICollection<Habitat> GetHabitats(PaginationQuery paginationQuery)

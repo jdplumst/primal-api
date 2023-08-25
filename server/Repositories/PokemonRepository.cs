@@ -17,9 +17,14 @@ namespace server.Repositories
             return _context.Pokemon.Where(p => p.SizeId == sizeId).OrderBy(p => p.Id).ToList();
         }
 
-        public ICollection<Pokemon> GetPokemonByHabitat(int habitatId)
+        public ICollection<Pokemon> GetPokemonByHabitatId(int habitatId)
         {
             return _context.Pokemon.Where(p => p.Habitat.Any(h => h.Id == habitatId)).OrderBy(p => p.Id).ToList();
+        }
+
+        public ICollection<Pokemon> GetPokemonByHabitatName(string habitatName)
+        {
+            return _context.Pokemon.Where(p => p.Habitat.Any(h => h.Name.ToLower() == habitatName.ToLower())).OrderBy(p => p.Id).ToList();
         }
     }
 }

@@ -20,17 +20,17 @@ namespace server.Controllers
             _resourceMaker = resourceMaker;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(200, Type = typeof(HabitatDto))]
-        public IActionResult GetHabitat(int id)
+        public IActionResult GetHabitatById(int id)
         {
-            var habitat = _habitatRepository.GetHabitat(id);
+            var habitat = _habitatRepository.GetHabitatById(id);
             if (habitat == null)
             {
                 return NotFound();
             }
             var pokemonList = new List<ResourceDto>();
-            var pokemon = _pokemonRepository.GetPokemonByHabitat(id);
+            var pokemon = _pokemonRepository.GetPokemonByHabitatId(id);
             foreach (var p in pokemon)
             {
                 var resource = _resourceMaker.CreatePokemonResource(p);
@@ -39,16 +39,35 @@ namespace server.Controllers
             return Ok(new HabitatDto(id, habitat.Name, habitat.Description, pokemonList));
         }
 
+        [HttpGet("{name}")]
+        [ProducesResponseType(200, Type = typeof(HabitatDto))]
+        public IActionResult GetHabitatByName(string name)
+        {
+            var habitat = _habitatRepository.GetHabitatByName(name);
+            if (habitat == null)
+            {
+                return NotFound();
+            }
+            var pokemonList = new List<ResourceDto>();
+            var pokemon = _pokemonRepository.GetPokemonByHabitatName(name);
+            foreach (var p in pokemon)
+            {
+                var resource = _resourceMaker.CreatePokemonResource(p);
+                pokemonList.Add(resource);
+            }
+            return Ok(new HabitatDto(habitat.Id, habitat.Name, habitat.Description, pokemonList));
+        }
+
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(PageDto<ICollection<HabitatDto>>))]
-        public IActionResult GetHabitats([FromQuery] PaginationQuery paginationQuery)
+        public IActionResult GetAllHabitats([FromQuery] PaginationQuery paginationQuery)
         {
             var habitats = _habitatRepository.GetHabitats(paginationQuery);
             var habitatDtos = new List<HabitatDto>();
             foreach (var habitat in habitats)
             {
                 var pokmemonList = new List<ResourceDto>();
-                var pokemon = _pokemonRepository.GetPokemonByHabitat(habitat.Id);
+                var pokemon = _pokemonRepository.GetPokemonByHabitatId(habitat.Id);
                 foreach (var p in pokemon)
                 {
                     var resource = _resourceMaker.CreatePokemonResource(p);
