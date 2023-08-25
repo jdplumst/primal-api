@@ -29,13 +29,8 @@ namespace server.Controllers
             {
                 return NotFound();
             }
-            var pokemonList = new List<ResourceDto>();
-            var pokemon = _pokemonRepository.GetPokemonByHabitatId(id);
-            foreach (var p in pokemon)
-            {
-                var resource = _resourceMaker.CreatePokemonResource(p);
-                pokemonList.Add(resource);
-            }
+            var pokemons = _pokemonRepository.GetPokemonByHabitatId(id);
+            var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
             return Ok(new HabitatDto(id, habitat.Name, habitat.Description, pokemonList));
         }
 
@@ -48,13 +43,8 @@ namespace server.Controllers
             {
                 return NotFound();
             }
-            var pokemonList = new List<ResourceDto>();
-            var pokemon = _pokemonRepository.GetPokemonByHabitatName(name);
-            foreach (var p in pokemon)
-            {
-                var resource = _resourceMaker.CreatePokemonResource(p);
-                pokemonList.Add(resource);
-            }
+            var pokemons = _pokemonRepository.GetPokemonByHabitatName(name);
+            var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
             return Ok(new HabitatDto(habitat.Id, habitat.Name, habitat.Description, pokemonList));
         }
 
@@ -66,14 +56,9 @@ namespace server.Controllers
             var habitatDtos = new List<HabitatDto>();
             foreach (var habitat in habitats)
             {
-                var pokmemonList = new List<ResourceDto>();
-                var pokemon = _pokemonRepository.GetPokemonByHabitatId(habitat.Id);
-                foreach (var p in pokemon)
-                {
-                    var resource = _resourceMaker.CreatePokemonResource(p);
-                    pokmemonList.Add(resource);
-                }
-                habitatDtos.Add(new HabitatDto(habitat.Id, habitat.Name, habitat.Description, pokmemonList));
+                var pokemons = _pokemonRepository.GetPokemonByHabitatId(habitat.Id);
+                var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
+                habitatDtos.Add(new HabitatDto(habitat.Id, habitat.Name, habitat.Description, pokemonList));
             }
             var infoDto = new InfoDto(paginationQuery.PageNumber, paginationQuery.PageSize, _habitatRepository.GetHabitatCount());
             return Ok(new PageDto<ICollection<HabitatDto>>(habitatDtos, infoDto));

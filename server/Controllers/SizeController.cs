@@ -29,13 +29,8 @@ namespace server.Controllers
             {
                 return NotFound();
             }
-            var pokemonList = new List<ResourceDto>();
-            var pokemon = _pokemonRepository.GetPokemonBySizeId(id);
-            foreach (var p in pokemon)
-            {
-                var resource = _resourceMaker.CreatePokemonResource(p);
-                pokemonList.Add(resource);
-            }
+            var pokemons = _pokemonRepository.GetPokemonBySizeId(id);
+            var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
             return Ok(new SizeDto(id, size.Name, size.Space, pokemonList));
         }
 
@@ -48,13 +43,8 @@ namespace server.Controllers
             {
                 return NotFound();
             }
-            var pokemonList = new List<ResourceDto>();
-            var pokemon = _pokemonRepository.GetPokemonBySizeName(name);
-            foreach (var p in pokemon)
-            {
-                var resource = _resourceMaker.CreatePokemonResource(p);
-                pokemonList.Add(resource);
-            }
+            var pokemons = _pokemonRepository.GetPokemonBySizeName(name);
+            var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
             return Ok(new SizeDto(size.Id, size.Name, size.Space, pokemonList));
         }
 
@@ -66,13 +56,9 @@ namespace server.Controllers
             var sizeDtos = new List<SizeDto>();
             foreach (var size in sizes)
             {
-                var pokemonResources = new List<ResourceDto>();
-                var pokemon = _pokemonRepository.GetPokemonBySizeId(size.Id);
-                foreach (var p in pokemon)
-                {
-                    pokemonResources.Add(_resourceMaker.CreatePokemonResource(p));
-                }
-                sizeDtos.Add(new SizeDto(size.Id, size.Name, size.Space, pokemonResources));
+                var pokemons = _pokemonRepository.GetPokemonBySizeId(size.Id);
+                var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
+                sizeDtos.Add(new SizeDto(size.Id, size.Name, size.Space, pokemonList));
             }
             var info = new InfoDto(paginationQuery.PageNumber, paginationQuery.PageSize, _sizeRepository.GetSizeCount());
             var pageDto = new PageDto<ICollection<SizeDto>>(sizeDtos, info);

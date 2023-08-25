@@ -5,6 +5,6 @@ namespace server.Interfaces
 {
     public interface IResourceMaker
     {
-        ResourceDto CreatePokemonResource(Pokemon pokemon);
+        ICollection<ResourceDto> CreatePokemonResources(ICollection<Pokemon> pokemons);
     }
 }
