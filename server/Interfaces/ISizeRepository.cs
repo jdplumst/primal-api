@@ -5,7 +5,8 @@ namespace server.Interfaces
 {
     public interface ISizeRepository
     {
-        Size GetSize(int id);
+        Size? GetSizeById(int id);
+        Size? GetSizeByName(string name);
         ICollection<Size> GetSizes(PaginationQuery paginationQuery);
         int GetSizeCount();
     }

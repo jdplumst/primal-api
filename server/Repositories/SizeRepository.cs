@@ -13,9 +13,14 @@ namespace server.Repositories
             _context = context;
         }
 
-        public Size GetSize(int id)
+        public Size? GetSizeById(int id)
         {
             return _context.Size.Find(id);
+        }
+
+        public Size? GetSizeByName(string name)
+        {
+            return _context.Size.Where(s => s.Name.ToLower() == name.ToLower()).FirstOrDefault();
         }
 
         public ICollection<Size> GetSizes(PaginationQuery paginationQuery)

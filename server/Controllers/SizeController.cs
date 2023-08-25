@@ -20,23 +20,42 @@ namespace server.Controllers
             _resourceMaker = resourceMaker;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         [ProducesResponseType(200, Type = typeof(SizeDto))]
-        public IActionResult GetSize(int id)
+        public IActionResult GetSizeById(int id)
         {
-            var size = _sizeRepository.GetSize(id);
+            var size = _sizeRepository.GetSizeById(id);
             if (size == null)
             {
                 return NotFound();
             }
             var pokemonList = new List<ResourceDto>();
-            var pokemon = _pokemonRepository.GetPokemonBySize(id);
+            var pokemon = _pokemonRepository.GetPokemonBySizeId(id);
             foreach (var p in pokemon)
             {
                 var resource = _resourceMaker.CreatePokemonResource(p);
                 pokemonList.Add(resource);
             }
             return Ok(new SizeDto(id, size.Name, size.Space, pokemonList));
+        }
+
+        [HttpGet("{name}")]
+        [ProducesResponseType(200, Type = typeof(SizeDto))]
+        public IActionResult GetSizeByName(string name)
+        {
+            var size = _sizeRepository.GetSizeByName(name);
+            if (size == null)
+            {
+                return NotFound();
+            }
+            var pokemonList = new List<ResourceDto>();
+            var pokemon = _pokemonRepository.GetPokemonBySizeName(name);
+            foreach (var p in pokemon)
+            {
+                var resource = _resourceMaker.CreatePokemonResource(p);
+                pokemonList.Add(resource);
+            }
+            return Ok(new SizeDto(size.Id, size.Name, size.Space, pokemonList));
         }
 
         [HttpGet]
@@ -48,7 +67,7 @@ namespace server.Controllers
             foreach (var size in sizes)
             {
                 var pokemonResources = new List<ResourceDto>();
-                var pokemon = _pokemonRepository.GetPokemonBySize(size.Id);
+                var pokemon = _pokemonRepository.GetPokemonBySizeId(size.Id);
                 foreach (var p in pokemon)
                 {
                     pokemonResources.Add(_resourceMaker.CreatePokemonResource(p));
