@@ -19,7 +19,8 @@ namespace server.Repositories
 
         public ICollection<Pokemon> GetPokemonBySizeName(string sizeName)
         {
-            return _context.Pokemon.Where(p => p.Name.ToLower() == sizeName.ToLower()).OrderBy(p => p.Id).ToList();
+            var sizes = _context.Size.Where(s => s.Name.ToLower() == sizeName.ToLower()).Select(p => p.Id);
+            return _context.Pokemon.Where(p => sizes.Contains(p.SizeId)).ToList();
         }
 
         public ICollection<Pokemon> GetPokemonByHabitatId(int habitatId)
