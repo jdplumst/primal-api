@@ -31,5 +31,10 @@ namespace server.Repositories
         {
             return _context.Pokemon.Where(p => p.Habitat.Any(h => h.Name.ToLower() == habitatName.ToLower())).OrderBy(p => p.Id).ToList();
         }
+
+        public ICollection<Pokemon> GetPokemonByWeightId(int weightId)
+        {
+            return _context.Pokemon.Where(p => p.WeightId == weightId).OrderBy(p => p.Id).ToList();
+        }
     }
 }
