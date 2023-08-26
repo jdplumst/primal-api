@@ -26,11 +26,11 @@ namespace server.Controllers
         [ProducesResponseType(200, Type = typeof(SizeDto))]
         public IActionResult GetSizeById(int id)
         {
-            _logger.LogInformation("Getting Size by Id");
+            _logger.LogInformation($"Getting Size by Id {id}");
             var size = _sizeRepository.GetSizeById(id);
             if (size == null)
             {
-                _logger.LogWarning($"Size with id {id} was not found");
+                _logger.LogWarning($"Size with Id {id} was not found");
                 return NotFound();
             }
             var pokemons = _pokemonRepository.GetPokemonBySizeId(id);
@@ -42,7 +42,7 @@ namespace server.Controllers
         [ProducesResponseType(200, Type = typeof(SizeDto))]
         public IActionResult GetSizeByName(string name)
         {
-            _logger.LogInformation("Getting Size by Name");
+            _logger.LogInformation($"Getting Size by Name {name}");
             var size = _sizeRepository.GetSizeByName(name);
             if (size == null)
             {

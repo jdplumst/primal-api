@@ -11,21 +11,25 @@ namespace server.Controllers
         private readonly IWeightRepository _weightRepository;
         private readonly IPokemonRepository _pokemonRepository;
         private readonly IResourceMaker _resourceMaker;
+        private readonly ILogger<WeightController> _logger;
 
-        public WeightController(IWeightRepository weightRepository, IPokemonRepository pokemonRepository, IResourceMaker resourceMaker)
+        public WeightController(IWeightRepository weightRepository, IPokemonRepository pokemonRepository, IResourceMaker resourceMaker, ILogger<WeightController> logger)
         {
             _weightRepository = weightRepository;
             _pokemonRepository = pokemonRepository;
             _resourceMaker = resourceMaker;
+            _logger = logger;
         }
 
         [HttpGet("{id:int}")]
         [ProducesResponseType(200, Type = typeof(WeightDto))]
         public IActionResult GetWeightById(int id)
         {
+            _logger.LogInformation($"Getting Weight by Id {id}");
             var weight = _weightRepository.GetWeightById(id);
             if (weight == null)
             {
+                _logger.LogWarning($"Weight with Id {id} was not found");
                 return NotFound();
             }
             var pokemon = _pokemonRepository.GetPokemonByWeightId(id);
@@ -37,9 +41,11 @@ namespace server.Controllers
         [ProducesResponseType(200, Type = typeof(WeightDto))]
         public IActionResult GetWeightByName(string name)
         {
+            _logger.LogInformation($"Getting Weight by Name {name}");
             var weight = _weightRepository.GetWeightByName(name);
             if (weight == null)
             {
+                _logger.LogWarning($"Size with name {name} was not found");
                 return NotFound();
             }
             var pokemon = _pokemonRepository.GetPokemonByWeightName(name);
