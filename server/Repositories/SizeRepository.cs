@@ -26,7 +26,7 @@ namespace server.Repositories
         public ICollection<Size> GetSizes(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.Size.Skip(skip).Take(paginationQuery.PageSize).OrderBy(s => s.Id).ToList();
+            return _context.Size.OrderBy(s => s.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
         }
 
         public int GetSizeCount()

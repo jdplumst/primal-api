@@ -26,7 +26,7 @@ namespace server.Repositories
         public ICollection<Weight> GetAllWeights(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.Weight.Skip(skip).Take(paginationQuery.PageSize).OrderBy(s => s.Id).ToList();
+            return _context.Weight.OrderBy(s => s.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
         }
 
         public int GetWeightCount()
