@@ -12,21 +12,25 @@ namespace server.Controllers
         private readonly ISizeRepository _sizeRepository;
         private readonly IPokemonRepository _pokemonRepository;
         private readonly IResourceMaker _resourceMaker;
+        private readonly ILogger<SizeController> _logger;
 
-        public SizeController(ISizeRepository sizeRepository, IPokemonRepository pokemonRepository, IResourceMaker resourceMaker)
+        public SizeController(ISizeRepository sizeRepository, IPokemonRepository pokemonRepository, IResourceMaker resourceMaker, ILogger<SizeController> logger)
         {
             _sizeRepository = sizeRepository;
             _pokemonRepository = pokemonRepository;
             _resourceMaker = resourceMaker;
+            _logger = logger;
         }
 
         [HttpGet("{id:int}")]
         [ProducesResponseType(200, Type = typeof(SizeDto))]
         public IActionResult GetSizeById(int id)
         {
+            _logger.LogInformation("Getting Size by Id");
             var size = _sizeRepository.GetSizeById(id);
             if (size == null)
             {
+                _logger.LogWarning($"Size with id {id} was not found");
                 return NotFound();
             }
             var pokemons = _pokemonRepository.GetPokemonBySizeId(id);
@@ -38,9 +42,11 @@ namespace server.Controllers
         [ProducesResponseType(200, Type = typeof(SizeDto))]
         public IActionResult GetSizeByName(string name)
         {
+            _logger.LogInformation("Getting Size by Name");
             var size = _sizeRepository.GetSizeByName(name);
             if (size == null)
             {
+                _logger.LogWarning($"Size with name {name} was not found");
                 return NotFound();
             }
             var pokemons = _pokemonRepository.GetPokemonBySizeName(name);
@@ -52,6 +58,7 @@ namespace server.Controllers
         [ProducesResponseType(200, Type = typeof(PageDto<ICollection<SizeDto>>))]
         public IActionResult GetSizes([FromQuery] PaginationQuery paginationQuery)
         {
+            _logger.LogInformation($"Getting all Sizes on page {paginationQuery.PageNumber} with {paginationQuery.PageSize} items");
             var sizes = _sizeRepository.GetSizes(paginationQuery);
             var sizeDtos = new List<SizeDto>();
             foreach (var size in sizes)
