@@ -37,5 +37,11 @@ namespace server.Repositories
         {
             return _context.Pokemon.Where(p => p.WeightId == weightId).OrderBy(p => p.Id).ToList();
         }
+
+        public ICollection<Pokemon> GetPokemonByWeightName(string weightName)
+        {
+            var weights = _context.Weight.Where(w => w.Name.ToLower() == weightName.ToLower()).Select(w => w.Id);
+            return _context.Pokemon.Where(p => weights.Contains(p.WeightId)).ToList();
+        }
     }
 }

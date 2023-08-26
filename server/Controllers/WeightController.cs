@@ -32,5 +32,19 @@ namespace server.Controllers
             var pokemonList = _resourceMaker.CreatePokemonResources(pokemon);
             return Ok(new WeightDto(id, weight.Name, weight.Range, pokemonList));
         }
+
+        [HttpGet("{name}")]
+        [ProducesResponseType(200, Type = typeof(WeightDto))]
+        public IActionResult GetWeightByName(string name)
+        {
+            var weight = _weightRepository.GetWeightByName(name);
+            if (weight == null)
+            {
+                return NotFound();
+            }
+            var pokemon = _pokemonRepository.GetPokemonByWeightName(name);
+            var pokemonList = _resourceMaker.CreatePokemonResources(pokemon);
+            return Ok(new WeightDto(weight.Id, weight.Name, weight.Range, pokemonList));
+        }
     }
 }

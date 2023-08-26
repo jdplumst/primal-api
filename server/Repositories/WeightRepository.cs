@@ -20,7 +20,7 @@ namespace server.Repositories
 
         public Weight? GetWeightByName(string weightName)
         {
-            return _context.Weight.Where(w => w.Name == weightName).FirstOrDefault();
+            return _context.Weight.Where(w => w.Name.ToLower() == weightName.ToLower()).FirstOrDefault();
         }
 
         public ICollection<Weight> GetAllWeights(PaginationQuery paginationQuery)
