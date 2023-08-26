@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using server.Dto;
-using server.Interfaces;
+using PrimalAPI.Dto;
+using PrimalAPI.Interfaces;
 
-namespace server.Controllers
+namespace PrimalAPI.Controllers
 {
     [ApiController]
     [Route("/api/weight")]

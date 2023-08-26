@@ -1,6 +1,6 @@
-﻿using server.Models;
+﻿using PrimalAPI.Models;
 
-namespace server.Interfaces
+namespace PrimalAPI.Interfaces
 {
     public interface IPokemonRepository
     {

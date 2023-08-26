@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using server.Helpers;
-using server.Interfaces;
-using server.Models;
-using server.Repositories;
+using PrimalAPI.Helpers;
+using PrimalAPI.Interfaces;
+using PrimalAPI.Models;
+using PrimalAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

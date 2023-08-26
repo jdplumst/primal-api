@@ -1,8 +1,8 @@
-﻿using server.Dto;
-using server.Interfaces;
-using server.Models;
+﻿using PrimalAPI.Dto;
+using PrimalAPI.Interfaces;
+using PrimalAPI.Models;
 
-namespace server.Helpers
+namespace PrimalAPI.Helpers
 {
     public class ResourceMaker : IResourceMaker
     {

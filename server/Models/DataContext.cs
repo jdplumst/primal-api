@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace server.Models
+namespace PrimalAPI.Models
 {
     public class DataContext : DbContext
     {

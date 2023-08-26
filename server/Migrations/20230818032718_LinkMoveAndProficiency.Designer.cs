@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using server.Models;
+using PrimalAPI.Models;
 
 #nullable disable
 
-namespace server.Migrations
+namespace PrimalAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
     [Migration("20230818032718_LinkMoveAndProficiency")]

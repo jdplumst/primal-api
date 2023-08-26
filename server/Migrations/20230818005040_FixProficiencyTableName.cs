@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace server.Migrations
+namespace PrimalAPI.Migrations
 {
     /// <inheritdoc />
     public partial class FixProficiencyTableName : Migration

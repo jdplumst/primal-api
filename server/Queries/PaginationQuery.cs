@@ -1,4 +1,4 @@
-﻿namespace server.Queries
+﻿namespace PrimalAPI.Queries
 {
     public class PaginationQuery
     {

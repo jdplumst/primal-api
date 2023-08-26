@@ -1,8 +1,8 @@
-﻿using server.Interfaces;
-using server.Models;
-using server.Queries;
+﻿using PrimalAPI.Interfaces;
+using PrimalAPI.Models;
+using PrimalAPI.Queries;
 
-namespace server.Repositories
+namespace PrimalAPI.Repositories
 {
     public class SizeRepository : ISizeRepository
     {

@@ -1,7 +1,7 @@
-﻿using server.Interfaces;
-using server.Models;
+﻿using PrimalAPI.Interfaces;
+using PrimalAPI.Models;
 
-namespace server.Repositories
+namespace PrimalAPI.Repositories
 {
     public class PokemonRepository : IPokemonRepository
     {

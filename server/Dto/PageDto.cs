@@ -1,4 +1,4 @@
-﻿namespace server.Dto
+﻿namespace PrimalAPI.Dto
 {
     public class PageDto<T>
     {

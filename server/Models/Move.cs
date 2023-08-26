@@ -1,4 +1,4 @@
-﻿namespace server.Models
+﻿namespace PrimalAPI.Models
 {
     public class Move
     {

@@ -1,7 +1,7 @@
-﻿using server.Dto;
-using server.Models;
+﻿using PrimalAPI.Dto;
+using PrimalAPI.Models;
 
-namespace server.Interfaces
+namespace PrimalAPI.Interfaces
 {
     public interface IResourceMaker
     {

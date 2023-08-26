@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace server.Migrations
+namespace PrimalAPI.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

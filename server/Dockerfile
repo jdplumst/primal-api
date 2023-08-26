@@ -11,4 +11,4 @@ WORKDIR /app
 EXPOSE 5000
 ENV ASPNETCORE_URLS http://*:5000
 COPY --from=build-env /app/out .
-ENTRYPOINT [ "dotnet", "server.dll" ]
+ENTRYPOINT [ "dotnet", "PrimalAPI.dll" ]

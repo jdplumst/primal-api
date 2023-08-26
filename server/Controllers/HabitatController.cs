@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using server.Dto;
-using server.Interfaces;
-using server.Queries;
+using PrimalAPI.Dto;
+using PrimalAPI.Interfaces;
+using PrimalAPI.Queries;
 
-namespace server.Controllers
+namespace PrimalAPI.Controllers
 {
     [ApiController]
     [Route("/api/habitat")]

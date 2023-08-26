@@ -1,7 +1,7 @@
-﻿using server.Models;
-using server.Queries;
+﻿using PrimalAPI.Models;
+using PrimalAPI.Queries;
 
-namespace server.Interfaces
+namespace PrimalAPI.Interfaces
 {
     public interface ISizeRepository
     {
