@@ -1,4 +1,4 @@
-﻿namespace PrimalAPI.GraphQL
+﻿namespace PrimalAPI.GraphQL.Queries
 {
     public class Query
     {

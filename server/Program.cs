@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PrimalAPI.GraphQL;
+using PrimalAPI.GraphQL.Queries;
 using PrimalAPI.Helpers;
 using PrimalAPI.Interfaces;
 using PrimalAPI.Models;

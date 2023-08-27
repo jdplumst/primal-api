@@ -9,5 +9,6 @@ namespace PrimalAPI.Interfaces
         Size? GetSizeByName(string name);
         ICollection<Size> GetSizes(PaginationQuery paginationQuery);
         int GetSizeCount();
+        Size? GetSizeByPokemonId(int id);
     }
 }

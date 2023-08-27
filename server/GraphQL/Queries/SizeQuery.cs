@@ -1,12 +1,12 @@
-﻿using PrimalAPI.Dto;
+﻿using PrimalAPI.GraphQL.Dto;
 using PrimalAPI.Interfaces;
 
-namespace PrimalAPI.GraphQL
+namespace PrimalAPI.GraphQL.Queries
 {
     [ExtendObjectType("Query")]
     public class SizeQuery
     {
-        public SizeDto? GetSizeById(
+        public SizeGraphQLDto? GetSizeById(
             int id,
             ISizeRepository sizeRepository,
             IPokemonRepository pokemonRepository,
@@ -20,12 +20,10 @@ namespace PrimalAPI.GraphQL
                 logger.LogWarning($"Size with Id {id} was not found (GraphQL)");
                 return null;
             }
-            var pokemon = pokemonRepository.GetPokemonBySizeId(id);
-            var pokemonList = resourceMaker.CreatePokemonResources(pokemon);
-            return new SizeDto(id, size.Name, size.Space, pokemonList);
+            return new SizeGraphQLDto(id, size.Name, size.Space);
         }
 
-        public SizeDto? GetSizeByName(
+        public SizeGraphQLDto? GetSizeByName(
             string name,
             ISizeRepository sizeRepository,
             IPokemonRepository pokemonRepository,
@@ -39,10 +37,7 @@ namespace PrimalAPI.GraphQL
                 logger.LogWarning($"Size with Name {name} was not found (GraphQL)");
                 return null;
             }
-            var pokemon = pokemonRepository.GetPokemonBySizeName(name);
-            var pokemonList = resourceMaker.CreatePokemonResources(pokemon);
-            return new SizeDto(size.Id, size.Name, size.Space, pokemonList);
+            return new SizeGraphQLDto(size.Id, size.Name, size.Space);
         }
-
     }
 }
