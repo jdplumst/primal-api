@@ -43,5 +43,12 @@ namespace PrimalAPI.Repositories
             var weights = _context.Weight.Where(w => w.Name.ToLower() == weightName.ToLower()).Select(w => w.Id);
             return _context.Pokemon.Where(p => weights.Contains(p.WeightId)).ToList();
         }
+
+        public ICollection<Pokemon> GetRandomPokemonFromHabitat(string habitatName, int count)
+        {
+            return _context.Pokemon
+                .Where(p => p.Habitat.Any(h => h.Name.ToLower() == habitatName.ToLower()))
+                .OrderBy(p => Guid.NewGuid()).Take(count).ToList();
+        }
     }
 }
