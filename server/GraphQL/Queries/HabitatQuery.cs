@@ -17,5 +17,17 @@ namespace PrimalAPI.GraphQL.Queries
             }
             return new HabitatGraphQLDto(habitat.Id, habitat.Name, habitat.Description);
         }
+
+        public ICollection<HabitatGraphQLDto> GetHabitats(IHabitatRepository habitatRepository, [Service] ILogger<HabitatQuery> logger)
+        {
+            logger.LogInformation($"Getting All Habitats (GraphQL)");
+            var habitats = habitatRepository.GetAllHabitats();
+            var habitatList = new List<HabitatGraphQLDto>();
+            foreach (var habitat in habitats)
+            {
+                habitatList.Add(new HabitatGraphQLDto(habitat.Id, habitat.Name, habitat.Description));
+            }
+            return habitatList;
+        }
     }
 }

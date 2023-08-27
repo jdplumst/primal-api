@@ -12,6 +12,7 @@ namespace PrimalAPI.GraphQL.Queries
             IPokemonRepository pokemonRepository,
             [Service] ILogger<PokemonQuery> logger)
         {
+            logger.LogInformation($"Getting {count} Random Pokemon from Habitat {habitatName} (GraphQL)");
             var pokemons = pokemonRepository.GetRandomPokemonFromHabitat(habitatName, count);
             var pokemonList = new List<PokemonGraphQLDto>();
             foreach (var pokemon in pokemons)

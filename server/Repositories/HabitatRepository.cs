@@ -38,5 +38,10 @@ namespace PrimalAPI.Repositories
         {
             return _context.Habitat.Where(h => h.Pokemon.Any(p => p.Id == pokemonId)).ToList();
         }
+
+        public ICollection<Habitat> GetAllHabitats()
+        {
+            return _context.Habitat.OrderBy(h => h.Id).ToList();
+        }
     }
 }
