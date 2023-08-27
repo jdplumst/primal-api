@@ -22,7 +22,16 @@ namespace PrimalAPI.GraphQL.Dto
         //public ICollection<EggGroup> EggGroup { get; set; }
         public string HatchRate { get; set; }
         //public ICollection<Diet> Diet { get; set; }
-        //public ICollection<Habitat> Habitat { get; set; }
+        public ICollection<HabitatGraphQLDto> GetHabitat([Parent] PokemonGraphQLDto pokemon, IHabitatRepository habitatRepository)
+        {
+            var habitats = habitatRepository.GetHabitatsByPokemonId(pokemon.Id);
+            var habitatList = new List<HabitatGraphQLDto>();
+            foreach (var habitat in habitats)
+            {
+                habitatList.Add(new HabitatGraphQLDto(habitat.Id, habitat.Name, habitat.Description));
+            }
+            return habitatList;
+        }
         //public ICollection<Proficiency> Proficiency { get; set; }
         //public ICollection<Skill> Skill { get; set; }
         //public ICollection<Passive> Passive { get; set; }

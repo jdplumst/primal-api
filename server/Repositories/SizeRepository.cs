@@ -34,9 +34,9 @@ namespace PrimalAPI.Repositories
             return _context.Size.Count();
         }
 
-        public Size? GetSizeByPokemonId(int id)
+        public Size? GetSizeByPokemonId(int pokemonId)
         {
-            return _context.Size.Where(s => s.Pokemon.Any(p => p.Id == id)).FirstOrDefault();
+            return _context.Size.Where(s => s.Pokemon.Any(p => p.Id == pokemonId)).FirstOrDefault();
         }
     }
 }

@@ -9,5 +9,6 @@ namespace PrimalAPI.Interfaces
         Habitat? GetHabitatByName(string name);
         ICollection<Habitat> GetHabitats(PaginationQuery paginationQuery);
         int GetHabitatCount();
+        ICollection<Habitat> GetHabitatsByPokemonId(int pokemonId);
     }
 }

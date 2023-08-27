@@ -33,5 +33,10 @@ namespace PrimalAPI.Repositories
         {
             return _context.Habitat.Count();
         }
+
+        public ICollection<Habitat> GetHabitatsByPokemonId(int pokemonId)
+        {
+            return _context.Habitat.Where(h => h.Pokemon.Any(p => p.Id == pokemonId)).ToList();
+        }
     }
 }

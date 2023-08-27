@@ -6,12 +6,7 @@ namespace PrimalAPI.GraphQL.Queries
     [ExtendObjectType("Query")]
     public class SizeQuery
     {
-        public SizeGraphQLDto? GetSizeById(
-            int id,
-            ISizeRepository sizeRepository,
-            IPokemonRepository pokemonRepository,
-            IResourceMaker resourceMaker,
-            [Service] ILogger<SizeQuery> logger)
+        public SizeGraphQLDto? GetSizeById(int id, ISizeRepository sizeRepository, [Service] ILogger<SizeQuery> logger)
         {
             logger.LogInformation($"Getting Size by Id {id} (GraphQL)");
             var size = sizeRepository.GetSizeById(id);

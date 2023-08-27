@@ -16,7 +16,8 @@ builder.Services.AddGraphQLServer()
     .RegisterService<IHabitatRepository>()
     .RegisterService<IResourceMaker>()
     .AddQueryType<Query>()
-    .AddTypeExtension<SizeQuery>();
+    .AddTypeExtension<SizeQuery>()
+    .AddTypeExtension<HabitatQuery>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
