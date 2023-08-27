@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PrimalAPI.GraphQL;
 using PrimalAPI.Helpers;
 using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
@@ -7,6 +8,9 @@ using PrimalAPI.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddGraphQLServer().AddQueryType<Query>()
+    .AddTypeExtension<SizeQuery>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -42,5 +46,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGraphQL();
 
 app.Run();
