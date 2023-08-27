@@ -6,7 +6,12 @@ namespace PrimalAPI.GraphQL
     [ExtendObjectType("Query")]
     public class SizeQuery
     {
-        public SizeDto? GetSizeById(int id, [Service] ISizeRepository sizeRepository, [Service] IPokemonRepository pokemonRepository, [Service] IResourceMaker resourceMaker, [Service] ILogger<SizeQuery> logger)
+        public SizeDto? GetSizeById(
+            int id,
+            ISizeRepository sizeRepository,
+            IPokemonRepository pokemonRepository,
+            IResourceMaker resourceMaker,
+            [Service] ILogger<SizeQuery> logger)
         {
             logger.LogInformation($"Getting Size by Id {id}");
             var size = sizeRepository.GetSizeById(id);
@@ -19,5 +24,6 @@ namespace PrimalAPI.GraphQL
             var pokemonList = resourceMaker.CreatePokemonResources(pokemon);
             return new SizeDto(id, size.Name, size.Space, pokemonList);
         }
+
     }
 }

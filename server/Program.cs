@@ -9,7 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddGraphQLServer().AddQueryType<Query>()
+builder.Services.AddGraphQLServer()
+    //.RegisterService<ILogger>()
+    .RegisterService<IPokemonRepository>()
+    .RegisterService<ISizeRepository>()
+    .RegisterService<IHabitatRepository>()
+    .RegisterService<IResourceMaker>()
+    .AddQueryType<Query>()
     .AddTypeExtension<SizeQuery>();
 
 builder.Services.AddControllers();
