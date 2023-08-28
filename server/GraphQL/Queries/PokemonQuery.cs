@@ -6,6 +6,7 @@ namespace PrimalAPI.GraphQL.Queries
     [ExtendObjectType("Query")]
     public class PokemonQuery
     {
+        [GraphQLDescription("Get a specific number of random Pokemon from a specific habitat")]
         public ICollection<PokemonGraphQLDto> GetRandomPokemonFromHabitat(
             string habitatName,
             int count,

@@ -2,17 +2,27 @@
 
 namespace PrimalAPI.GraphQL.Dto
 {
+    [GraphQLDescription("Pokemon are creatures that inhabit the world of the game")]
     public class PokemonGraphQLDto
     {
+        [GraphQLDescription("The id of the Pokemon")]
         public int Id { get; set; }
+        [GraphQLDescription("The name of the Pokemon")]
         public string Name { get; set; }
+        [GraphQLDescription("The HP stat of the Pokemon")]
         public int HP { get; set; }
+        [GraphQLDescription("The attack stat of the Pokemon")]
         public int Attack { get; set; }
+        [GraphQLDescription("The special attack stat of the Pokemon")]
         public int SpecialAttack { get; set; }
+        [GraphQLDescription("The defense stat of the Pokemon")]
         public int Defense { get; set; }
+        [GraphQLDescription("The special defense stat of the Pokemon")]
         public int SpecialDefense { get; set; }
+        [GraphQLDescription("The speed stat of the Pokemon")]
         public int Speed { get; set; }
         //public ICollection<Type> Type { get; set; }
+        [GraphQLDescription("The size of the Pokemon")]
         public SizeGraphQLDto GetSize([Parent] PokemonGraphQLDto pokemon, ISizeRepository sizeRepository)
         {
             var size = sizeRepository.GetSizeByPokemonId(pokemon.Id);
@@ -20,8 +30,10 @@ namespace PrimalAPI.GraphQL.Dto
         }
         //public int WeightId { get; set; }
         //public ICollection<EggGroup> EggGroup { get; set; }
+        [GraphQLDescription("The amount of time it takes this Pokemon to hatch from an egg")]
         public string HatchRate { get; set; }
         //public ICollection<Diet> Diet { get; set; }
+        [GraphQLDescription("A list of habitats that this Pokemon can be found in")]
         public ICollection<HabitatGraphQLDto> GetHabitat([Parent] PokemonGraphQLDto pokemon, IHabitatRepository habitatRepository)
         {
             var habitats = habitatRepository.GetHabitatsByPokemonId(pokemon.Id);
