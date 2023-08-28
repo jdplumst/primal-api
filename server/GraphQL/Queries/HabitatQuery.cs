@@ -6,7 +6,7 @@ namespace PrimalAPI.GraphQL.Queries
     [ExtendObjectType("Query")]
     public class HabitatQuery
     {
-        [GraphQLDescription("Get a specific habitat by ID")]
+        [GraphQLDescription("Get a specific habitat by id")]
         public HabitatGraphQLDto? GetHabitatById(int id, IHabitatRepository habitatRepository, [Service] ILogger<HabitatQuery> logger)
         {
             logger.LogInformation($"Getting Habitat by Id {id} (GraphQL)");

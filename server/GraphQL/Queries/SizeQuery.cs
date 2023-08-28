@@ -6,6 +6,7 @@ namespace PrimalAPI.GraphQL.Queries
     [ExtendObjectType("Query")]
     public class SizeQuery
     {
+        [GraphQLDescription("Get a specific size by id")]
         public SizeGraphQLDto? GetSizeById(int id, ISizeRepository sizeRepository, [Service] ILogger<SizeQuery> logger)
         {
             logger.LogInformation($"Getting Size by Id {id} (GraphQL)");
@@ -18,6 +19,7 @@ namespace PrimalAPI.GraphQL.Queries
             return new SizeGraphQLDto(id, size.Name, size.Space);
         }
 
+        [GraphQLDescription("Get a specific size by name")]
         public SizeGraphQLDto? GetSizeByName(
             string name,
             ISizeRepository sizeRepository,

@@ -2,11 +2,16 @@
 
 namespace PrimalAPI.GraphQL.Dto
 {
+    [GraphQLDescription("Use Pokémon sizes to determine how feasible it is for a Pokémon to be moving together with you through halls, tight caves, or while just walking down the street together")]
     public class SizeGraphQLDto
     {
+        [GraphQLDescription("The id of the size")]
         public int Id { get; set; }
+        [GraphQLDescription("The name of the size")]
         public string Name { get; set; }
+        [GraphQLDescription("The amount of space that Pokemon of this size take up")]
         public string Space { get; set; }
+        [GraphQLDescription("A list of the Pokemon of this size")]
         public ICollection<PokemonGraphQLDto> GetPokemon([Parent] SizeGraphQLDto size, IPokemonRepository pokemonRepository)
         {
             var pokemons = pokemonRepository.GetPokemonBySizeId(size.Id);
