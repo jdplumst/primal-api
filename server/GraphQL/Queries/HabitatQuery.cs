@@ -13,7 +13,20 @@ namespace PrimalAPI.GraphQL.Queries
             var habitat = habitatRepository.GetHabitatById(id);
             if (habitat == null)
             {
-                logger.LogWarning($"Size with Id {id} was not found (GraphQL)");
+                logger.LogWarning($"Habitat with Id {id} was not found (GraphQL)");
+                return null;
+            }
+            return new HabitatGraphQLDto(habitat.Id, habitat.Name, habitat.Description);
+        }
+
+        [GraphQLDescription("Get a specific habitat by name")]
+        public HabitatGraphQLDto? GetHabitatByName(string name, IHabitatRepository habitatRepository, [Service] ILogger<HabitatQuery> logger)
+        {
+            logger.LogInformation($"Getting Habitat by Name {name} (GraphQL)");
+            var habitat = habitatRepository.GetHabitatByName(name);
+            if (habitat == null)
+            {
+                logger.LogWarning($"Habitat with Name {name} was not found (GraphQL)");
                 return null;
             }
             return new HabitatGraphQLDto(habitat.Id, habitat.Name, habitat.Description);
