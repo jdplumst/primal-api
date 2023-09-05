@@ -7,7 +7,7 @@ namespace PrimalAPI.Interfaces
     {
         Weight? GetWeightById(int weightId);
         Weight? GetWeightByName(string weightName);
-        ICollection<Weight> GetAllWeights(PaginationQuery paginationQuery);
+        ICollection<Weight> GetWeights(PaginationQuery paginationQuery);
         int GetWeightCount();
     }
 }

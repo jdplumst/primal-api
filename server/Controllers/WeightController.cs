@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PrimalAPI.Dto;
 using PrimalAPI.Interfaces;
+using PrimalAPI.Queries;
 
 namespace PrimalAPI.Controllers
 {
@@ -51,6 +52,24 @@ namespace PrimalAPI.Controllers
             var pokemon = _pokemonRepository.GetPokemonByWeightName(name);
             var pokemonList = _resourceMaker.CreatePokemonResources(pokemon);
             return Ok(new WeightDto(weight.Id, weight.Name, weight.Range, pokemonList));
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(PageDto<ICollection<WeightDto>>))]
+        public IActionResult GetWeights([FromQuery] PaginationQuery paginationQuery)
+        {
+            _logger.LogInformation($"Getting all Weights on page {paginationQuery.PageNumber} with {paginationQuery.PageSize} items");
+            var weights = _weightRepository.GetWeights(paginationQuery);
+            var weightDtos = new List<WeightDto>();
+            foreach (var weight in weights)
+            {
+                var pokemons = _pokemonRepository.GetPokemonBySizeId(weight.Id);
+                var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
+                weightDtos.Add(new WeightDto(weight.Id, weight.Name, weight.Range, pokemonList));
+            }
+            var info = new InfoDto(paginationQuery.PageNumber, paginationQuery.PageSize, _weightRepository.GetWeightCount());
+            var pageDto = new PageDto<ICollection<WeightDto>>(weightDtos, info);
+            return Ok(pageDto);
         }
     }
 }

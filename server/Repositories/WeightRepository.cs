@@ -23,6 +23,12 @@ namespace PrimalAPI.Repositories
             return _context.Weight.Where(w => w.Name.ToLower() == weightName.ToLower()).FirstOrDefault();
         }
 
+        public ICollection<Weight> GetWeights(PaginationQuery paginationQuery)
+        {
+            var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
+            return _context.Weight.OrderBy(s => s.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
+        }
+
         public ICollection<Weight> GetAllWeights(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
