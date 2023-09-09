@@ -33,6 +33,7 @@ namespace PrimalAPI.GraphQL.Queries
         }
 
         [GraphQLDescription("Get a list of all habitats")]
+        [UsePaging]
         public ICollection<HabitatGraphQLDto> GetHabitats(IHabitatRepository habitatRepository, [Service] ILogger<HabitatQuery> logger)
         {
             logger.LogInformation($"Getting All Habitats (GraphQL)");
