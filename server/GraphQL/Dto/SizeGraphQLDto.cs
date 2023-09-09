@@ -2,6 +2,7 @@
 
 namespace PrimalAPI.GraphQL.Dto
 {
+    [GraphQLName("Size")]
     [GraphQLDescription("Use Pokémon sizes to determine how feasible it is for a Pokémon to be moving together with you through halls, tight caves, or while just walking down the street together")]
     public class SizeGraphQLDto
     {

@@ -2,6 +2,7 @@
 
 namespace PrimalAPI.GraphQL.Dto
 {
+    [GraphQLName("Habitat")]
     [GraphQLDescription("The habitat entry explains what kind of terrain to look for if you intend to hunt for a particular species of Pokémon")]
     public class HabitatGraphQLDto
     {

@@ -2,6 +2,7 @@
 
 namespace PrimalAPI.GraphQL.Dto
 {
+    [GraphQLName("Pokemon")]
     [GraphQLDescription("Pokemon are creatures that inhabit the world of the game")]
     public class PokemonGraphQLDto
     {
