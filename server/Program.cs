@@ -13,6 +13,7 @@ builder.Services.AddGraphQLServer()
     .RegisterService<IPokemonRepository>()
     .RegisterService<ISizeRepository>()
     .RegisterService<IHabitatRepository>()
+    .RegisterService<IRarityRepository>()
     .RegisterService<IResourceMaker>()
     .AddQueryType<Query>()
     .AddTypeExtension<PokemonQuery>()
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IPokemonRepository, PokemonRepository>();
 builder.Services.AddScoped<ISizeRepository, SizeRepository>();
 builder.Services.AddScoped<IHabitatRepository, HabitatRepository>();
 builder.Services.AddScoped<IWeightRepository, WeightRepository>();
+builder.Services.AddScoped<IRarityRepository, RarityRepository>();
 builder.Services.AddScoped<IResourceMaker, ResourceMaker>();
 
 builder.Services.AddCors();
