@@ -50,6 +50,13 @@ namespace PrimalAPI.GraphQL.Dto
         //public ICollection<Passive> Passive { get; set; }
         //public ICollection<Move> Move { get; set; }
 
+        [GraphQLDescription("The rarity of the Pokemon")]
+        public RarityGraphQLDto GetRarity([Parent] PokemonGraphQLDto pokemon, IRarityRepository rarityRepository)
+        {
+            var rarity = rarityRepository.GetRarityByPokemonId(pokemon.Id);
+            return new RarityGraphQLDto(rarity!.Id, rarity.Name, rarity.Description);
+        }
+
         public PokemonGraphQLDto(
             int id,
             string name,
