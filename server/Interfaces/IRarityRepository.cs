@@ -2,8 +2,9 @@
 
 namespace PrimalAPI.Interfaces
 {
-    public interface RarityRepository
+    public interface IRarityRepository
     {
         Rarity? GetRarityById(int rarityId);
+        Rarity? GetRarityByPokemonId(int pokemonId);
     }
 }
