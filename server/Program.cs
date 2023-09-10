@@ -19,7 +19,8 @@ builder.Services.AddGraphQLServer()
     .AddQueryType<Query>()
     .AddTypeExtension<PokemonQuery>()
     .AddTypeExtension<SizeQuery>()
-    .AddTypeExtension<HabitatQuery>();
+    .AddTypeExtension<HabitatQuery>()
+    .AddTypeExtension<RarityQuery>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
