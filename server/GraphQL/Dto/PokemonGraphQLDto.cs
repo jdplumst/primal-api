@@ -27,7 +27,7 @@ namespace PrimalAPI.GraphQL.Dto
         public SizeGraphQLDto GetSize([Parent] PokemonGraphQLDto pokemon, ISizeRepository sizeRepository)
         {
             var size = sizeRepository.GetSizeByPokemonId(pokemon.Id);
-            return new SizeGraphQLDto(size.Id, size.Name, size.Space);
+            return new SizeGraphQLDto(size!.Id, size.Name, size.Space);
         }
         //public int WeightId { get; set; }
         //public ICollection<EggGroup> EggGroup { get; set; }

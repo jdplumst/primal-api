@@ -18,6 +18,7 @@ namespace PrimalAPI.Models
         public required DbSet<Skill> Skill { get; set; }
         public required DbSet<Passive> Passive { get; set; }
         public required DbSet<Move> Move { get; set; }
+        public required DbSet<Rarity> Rarity { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

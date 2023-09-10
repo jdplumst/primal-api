@@ -13,7 +13,7 @@
             Info = info;
 
         }
-        public InfoDto Info { get; set; }
-        public T Data { get; set; }
+        public InfoDto Info { get; set; } = default!;
+        public T Data { get; set; } = default!;
     }
 }
