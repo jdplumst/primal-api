@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddGraphQLServer()
-    .AddMaxExecutionDepthRule(5)
+    .AddMaxExecutionDepthRule(5, skipIntrospectionFields: true)
     .RegisterService<IPokemonRepository>()
     .RegisterService<ISizeRepository>()
     .RegisterService<IHabitatRepository>()
