@@ -3,6 +3,7 @@
 namespace PrimalAPI.GraphQL.Dto
 {
     [GraphQLName("Rarity")]
+    [GraphQLDescription("Pokémon are not equal in population, some Pokémon mass produce to try and survive predation, while others just live in large families that work together. Others never stray from comfort while others commonly swarm town marketplaces.")]
     public class RarityGraphQLDto
     {
         [GraphQLDescription("The id of the rarity")]
