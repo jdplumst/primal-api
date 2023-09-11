@@ -18,5 +18,18 @@ namespace PrimalAPI.GraphQL.Queries
             }
             return new RarityGraphQLDto(id, rarity.Name, rarity.Description);
         }
+
+        [GraphQLDescription("Get a specific rarity by name")]
+        public RarityGraphQLDto? GetRarityByName(string name, IRarityRepository rarityRepository, [Service] ILogger<RarityQuery> logger)
+        {
+            logger.LogInformation($"Getting Rarity by Name {name} (GraphQL)");
+            var rarity = rarityRepository.GetRarityByName(name);
+            if (rarity == null)
+            {
+                logger.LogWarning($"Rarity with Name {name} was not found (GraphQL)");
+                return null;
+            }
+            return new RarityGraphQLDto(rarity.Id, rarity.Name, rarity.Description);
+        }
     }
 }

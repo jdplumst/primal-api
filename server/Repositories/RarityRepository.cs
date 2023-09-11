@@ -14,6 +14,11 @@ namespace PrimalAPI.Repositories
             return _context.Rarity.Where(r => r.Id == rarityId).FirstOrDefault();
         }
 
+        public Rarity? GetRarityByName(string rarityName)
+        {
+            return _context.Rarity.Where(r => r.Name.ToLower() == rarityName.ToLower()).FirstOrDefault();
+        }
+
         public Rarity? GetRarityByPokemonId(int pokemonId)
         {
             return _context.Rarity.Where(r => r.Pokemon.Any(p => p.Id == pokemonId)).FirstOrDefault();
