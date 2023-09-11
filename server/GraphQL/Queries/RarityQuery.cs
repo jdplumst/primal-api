@@ -31,5 +31,19 @@ namespace PrimalAPI.GraphQL.Queries
             }
             return new RarityGraphQLDto(rarity.Id, rarity.Name, rarity.Description);
         }
+
+        [GraphQLDescription("Get a list of all rarities")]
+        [UsePaging]
+        public ICollection<RarityGraphQLDto> GetRarities(IRarityRepository rarityRepository, [Service] ILogger<RarityQuery> logger)
+        {
+            logger.LogInformation($"Getting All Rarities (GraphQL)");
+            var rarities = rarityRepository.GetAllRarities();
+            var rarityList = new List<RarityGraphQLDto>();
+            foreach (var rarity in rarities)
+            {
+                rarityList.Add(new RarityGraphQLDto(rarity.Id, rarity.Name, rarity.Description));
+            }
+            return rarityList;
+        }
     }
 }

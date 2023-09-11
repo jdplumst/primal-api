@@ -23,5 +23,10 @@ namespace PrimalAPI.Repositories
         {
             return _context.Rarity.Where(r => r.Pokemon.Any(p => p.Id == pokemonId)).FirstOrDefault();
         }
+
+        public ICollection<Rarity> GetAllRarities()
+        {
+            return _context.Rarity.OrderBy(r => r.Id).ToList();
+        }
     }
 }

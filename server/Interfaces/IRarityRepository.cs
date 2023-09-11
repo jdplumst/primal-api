@@ -7,5 +7,6 @@ namespace PrimalAPI.Interfaces
         Rarity? GetRarityById(int rarityId);
         Rarity? GetRarityByName(string rarityName);
         Rarity? GetRarityByPokemonId(int pokemonId);
+        ICollection<Rarity> GetAllRarities();
     }
 }
