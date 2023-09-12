@@ -7,7 +7,10 @@ namespace PrimalAPI.GraphQL.Queries
     public class SizeQuery
     {
         [GraphQLDescription("Get a specific size by id")]
-        public SizeGraphQLDto? GetSizeById(int id, ISizeRepository sizeRepository, [Service] ILogger<SizeQuery> logger)
+        public SizeGraphQLDto? GetSizeById(
+            int id,
+            ISizeRepository sizeRepository,
+            [Service] ILogger<SizeQuery> logger)
         {
             logger.LogInformation($"Getting Size by Id {id} (GraphQL)");
             var size = sizeRepository.GetSizeById(id);
@@ -23,8 +26,6 @@ namespace PrimalAPI.GraphQL.Queries
         public SizeGraphQLDto? GetSizeByName(
             string name,
             ISizeRepository sizeRepository,
-            IPokemonRepository pokemonRepository,
-            IResourceMaker resourceMaker,
             [Service] ILogger<SizeQuery> logger)
         {
             logger.LogInformation($"Getting Size by Name {name} (GraphQL)");
@@ -39,7 +40,9 @@ namespace PrimalAPI.GraphQL.Queries
 
         [GraphQLDescription("Get a list of all sizes")]
         [UsePaging]
-        public ICollection<SizeGraphQLDto> GetSizes(ISizeRepository sizeRepository, [Service] ILogger<SizeQuery> logger)
+        public ICollection<SizeGraphQLDto> GetSizes(
+            ISizeRepository sizeRepository,
+            [Service] ILogger<SizeQuery> logger)
         {
             logger.LogInformation($"Getting all sizes (GraphQL)");
             var sizes = sizeRepository.GetAllSizes();

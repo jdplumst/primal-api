@@ -7,7 +7,10 @@ namespace PrimalAPI.GraphQL.Queries
     public class WeightQuery
     {
         [GraphQLDescription("Get a specific weight class by id")]
-        public WeightGraphQLDto? GetWeightById(int id, IWeightRepository weightRepository, [Service] ILogger<WeightQuery> logger)
+        public WeightGraphQLDto? GetWeightById(
+            int id,
+            IWeightRepository weightRepository,
+            [Service] ILogger<WeightQuery> logger)
         {
             logger.LogInformation($"Getting Weight by Id {id} (GraphQL)");
             var weight = weightRepository.GetWeightById(id);
@@ -20,7 +23,10 @@ namespace PrimalAPI.GraphQL.Queries
         }
 
         [GraphQLDescription("Get a specific weight class by name")]
-        public WeightGraphQLDto? GetWeightByName(string name, IWeightRepository weightRepository, [Service] ILogger<WeightQuery> logger)
+        public WeightGraphQLDto? GetWeightByName(
+            string name,
+            IWeightRepository weightRepository,
+            [Service] ILogger<WeightQuery> logger)
         {
             logger.LogInformation($"Getting Weight by Name {name} (GraphQL)");
             var weight = weightRepository.GetWeightByName(name);
@@ -34,7 +40,9 @@ namespace PrimalAPI.GraphQL.Queries
 
         [GraphQLDescription("Get a list of all weights")]
         [UsePaging]
-        public ICollection<WeightGraphQLDto> GetWeights(IWeightRepository weightRepository, [Service] ILogger<WeightQuery> logger)
+        public ICollection<WeightGraphQLDto> GetWeights(
+            IWeightRepository weightRepository,
+            [Service] ILogger<WeightQuery> logger)
         {
             logger.LogInformation($"Getting all weights (GraphQL)");
             var weights = weightRepository.GetAllWeights();

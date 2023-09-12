@@ -33,14 +33,18 @@ namespace PrimalAPI.GraphQL.Dto
         //public ICollection<Type> Type { get; set; }
 
         [GraphQLDescription("The size of the Pokemon")]
-        public SizeGraphQLDto GetSize([Parent] PokemonGraphQLDto pokemon, ISizeRepository sizeRepository)
+        public SizeGraphQLDto GetSize(
+            [Parent] PokemonGraphQLDto pokemon,
+            ISizeRepository sizeRepository)
         {
             var size = sizeRepository.GetSizeByPokemonId(pokemon.Id);
             return new SizeGraphQLDto(size!.Id, size.Name, size.Space);
         }
 
         [GraphQLDescription("The weight class of the Pokemon")]
-        public WeightGraphQLDto GetWeight([Parent] PokemonGraphQLDto pokemon, IWeightRepository weightRepository)
+        public WeightGraphQLDto GetWeight(
+            [Parent] PokemonGraphQLDto pokemon,
+            IWeightRepository weightRepository)
         {
             var weight = weightRepository.GetWeightByPokemonId(pokemon.Id);
             return new WeightGraphQLDto(weight!.Id, weight.Name, weight.Range);
@@ -66,7 +70,9 @@ namespace PrimalAPI.GraphQL.Dto
         //public ICollection<Diet> Diet { get; set; }
 
         [GraphQLDescription("A list of habitats that this Pokemon can be found in")]
-        public ICollection<HabitatGraphQLDto> GetHabitats([Parent] PokemonGraphQLDto pokemon, IHabitatRepository habitatRepository)
+        public ICollection<HabitatGraphQLDto> GetHabitats(
+            [Parent] PokemonGraphQLDto pokemon,
+            IHabitatRepository habitatRepository)
         {
             var habitats = habitatRepository.GetHabitatsByPokemonId(pokemon.Id);
             var habitatList = new List<HabitatGraphQLDto>();
@@ -86,7 +92,9 @@ namespace PrimalAPI.GraphQL.Dto
         //public ICollection<Move> Move { get; set; }
 
         [GraphQLDescription("The rarity of the Pokemon")]
-        public RarityGraphQLDto GetRarity([Parent] PokemonGraphQLDto pokemon, IRarityRepository rarityRepository)
+        public RarityGraphQLDto GetRarity(
+            [Parent] PokemonGraphQLDto pokemon,
+            IRarityRepository rarityRepository)
         {
             var rarity = rarityRepository.GetRarityByPokemonId(pokemon.Id);
             return new RarityGraphQLDto(rarity!.Id, rarity.Name, rarity.Description);
