@@ -18,5 +18,18 @@ namespace PrimalAPI.GraphQL.Queries
             }
             return new WeightGraphQLDto(id, weight.Name, weight.Range);
         }
+
+        [GraphQLDescription("Get a specific weight class by name")]
+        public WeightGraphQLDto? GetWeightByName(string name, IWeightRepository weightRepository, [Service] ILogger<WeightQuery> logger)
+        {
+            logger.LogInformation($"Getting Weight by Name {name} (GraphQL)");
+            var weight = weightRepository.GetWeightByName(name);
+            if (weight == null)
+            {
+                logger.LogWarning($"Weight with Name {name} was not found (GraphQL)");
+                return null;
+            }
+            return new WeightGraphQLDto(weight.Id, weight.Name, weight.Range);
+        }
     }
 }
