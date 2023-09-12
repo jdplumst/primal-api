@@ -26,18 +26,17 @@ namespace PrimalAPI.Repositories
         public ICollection<Weight> GetWeights(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.Weight.OrderBy(s => s.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
-        }
-
-        public ICollection<Weight> GetAllWeights(PaginationQuery paginationQuery)
-        {
-            var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.Weight.OrderBy(s => s.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
+            return _context.Weight.OrderBy(w => w.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
         }
 
         public int GetWeightCount()
         {
             return _context.Weight.Count();
+        }
+
+        public ICollection<Weight> GetAllWeights()
+        {
+            return _context.Weight.OrderBy(w => w.Id).ToList();
         }
     }
 }

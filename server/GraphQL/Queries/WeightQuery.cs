@@ -31,5 +31,19 @@ namespace PrimalAPI.GraphQL.Queries
             }
             return new WeightGraphQLDto(weight.Id, weight.Name, weight.Range);
         }
+
+        [GraphQLDescription("Get a list of all weights")]
+        [UsePaging]
+        public ICollection<WeightGraphQLDto> GetWeights(IWeightRepository weightRepository, [Service] ILogger<WeightQuery> logger)
+        {
+            logger.LogInformation($"Getting all weights (GraphQL)");
+            var weights = weightRepository.GetAllWeights();
+            var weightList = new List<WeightGraphQLDto>();
+            foreach (var weight in weights)
+            {
+                weightList.Add(new WeightGraphQLDto(weight.Id, weight.Name, weight.Range));
+            }
+            return weightList;
+        }
     }
 }
