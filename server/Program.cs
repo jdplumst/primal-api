@@ -14,12 +14,14 @@ builder.Services.AddGraphQLServer()
     .RegisterService<IPokemonRepository>()
     .RegisterService<ISizeRepository>()
     .RegisterService<IHabitatRepository>()
+    .RegisterService<IWeightRepository>()
     .RegisterService<IRarityRepository>()
     .RegisterService<IResourceMaker>()
     .AddQueryType<Query>()
     .AddTypeExtension<PokemonQuery>()
     .AddTypeExtension<SizeQuery>()
     .AddTypeExtension<HabitatQuery>()
+    .AddTypeExtension<WeightQuery>()
     .AddTypeExtension<RarityQuery>();
 
 builder.Services.AddControllers();
