@@ -38,5 +38,10 @@ namespace PrimalAPI.Repositories
         {
             return _context.Size.Where(s => s.Pokemon.Any(p => p.Id == pokemonId)).FirstOrDefault();
         }
+
+        public ICollection<Size> GetAllSizes()
+        {
+            return _context.Size.OrderBy(s => s.Id).ToList();
+        }
     }
 }

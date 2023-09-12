@@ -36,5 +36,19 @@ namespace PrimalAPI.GraphQL.Queries
             }
             return new SizeGraphQLDto(size.Id, size.Name, size.Space);
         }
+
+        [GraphQLDescription("Get a list of all sizes")]
+        [UsePaging]
+        public ICollection<SizeGraphQLDto> GetSizes(ISizeRepository sizeRepository, [Service] ILogger<SizeQuery> logger)
+        {
+            logger.LogInformation($"Getting all sizes (GraphQL)");
+            var sizes = sizeRepository.GetAllSizes();
+            var sizeList = new List<SizeGraphQLDto>();
+            foreach (var size in sizes)
+            {
+                sizeList.Add(new SizeGraphQLDto(size.Id, size.Name, size.Space));
+            }
+            return sizeList;
+        }
     }
 }
