@@ -37,5 +37,21 @@ namespace PrimalAPI.GraphQL.Queries
             }
             return new EggGroupGraphQLDto(eggGroup.Id, eggGroup.Name);
         }
+
+        [GraphQLDescription("Get a list of all egg groups")]
+        [UsePaging]
+        public ICollection<EggGroupGraphQLDto> GetEggGroups(
+            IEggGroupRepository eggGroupRepository,
+            [Service] ILogger<EggGroupQuery> logger)
+        {
+            logger.LogInformation($"Getting All Egg Groups (GraphQL)");
+            var eggGroups = eggGroupRepository.GetAllEggGroups();
+            var eggGroupList = new List<EggGroupGraphQLDto>();
+            foreach (var eggGroup in eggGroups)
+            {
+                eggGroupList.Add(new EggGroupGraphQLDto(eggGroup.Id, eggGroup.Name));
+            }
+            return eggGroupList;
+        }
     }
 }
