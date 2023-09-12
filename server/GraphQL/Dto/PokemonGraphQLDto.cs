@@ -46,7 +46,19 @@ namespace PrimalAPI.GraphQL.Dto
             return new WeightGraphQLDto(weight!.Id, weight.Name, weight.Range);
         }
 
-        //public ICollection<EggGroup> EggGroup { get; set; }
+        [GraphQLDescription("A list of the egg groups of this Pokemon")]
+        public ICollection<EggGroupGraphQLDto> GetEggGroups(
+            [Parent] PokemonGraphQLDto pokemon,
+            IEggGroupRepository eggGroupRepository)
+        {
+            var eggGroups = eggGroupRepository.GetEggGroupByPokemonId(pokemon.Id);
+            var eggGroupList = new List<EggGroupGraphQLDto>();
+            foreach (var eggGroup in eggGroups)
+            {
+                eggGroupList.Add(new EggGroupGraphQLDto(eggGroup.Id, eggGroup.Name));
+            }
+            return eggGroupList;
+        }
 
         [GraphQLDescription("The amount of time it takes this Pokemon to hatch from an egg")]
         public string HatchRate { get; set; }
@@ -54,7 +66,7 @@ namespace PrimalAPI.GraphQL.Dto
         //public ICollection<Diet> Diet { get; set; }
 
         [GraphQLDescription("A list of habitats that this Pokemon can be found in")]
-        public ICollection<HabitatGraphQLDto> GetHabitat([Parent] PokemonGraphQLDto pokemon, IHabitatRepository habitatRepository)
+        public ICollection<HabitatGraphQLDto> GetHabitats([Parent] PokemonGraphQLDto pokemon, IHabitatRepository habitatRepository)
         {
             var habitats = habitatRepository.GetHabitatsByPokemonId(pokemon.Id);
             var habitatList = new List<HabitatGraphQLDto>();
