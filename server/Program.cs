@@ -16,13 +16,15 @@ builder.Services.AddGraphQLServer()
     .RegisterService<IHabitatRepository>()
     .RegisterService<IWeightRepository>()
     .RegisterService<IRarityRepository>()
+    .RegisterService<IEggGroupRepository>()
     .RegisterService<IResourceMaker>()
     .AddQueryType<Query>()
     .AddTypeExtension<PokemonQuery>()
     .AddTypeExtension<SizeQuery>()
     .AddTypeExtension<HabitatQuery>()
     .AddTypeExtension<WeightQuery>()
-    .AddTypeExtension<RarityQuery>();
+    .AddTypeExtension<RarityQuery>()
+    .AddTypeExtension<EggGroupQuery>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -34,6 +36,7 @@ builder.Services.AddScoped<ISizeRepository, SizeRepository>();
 builder.Services.AddScoped<IHabitatRepository, HabitatRepository>();
 builder.Services.AddScoped<IWeightRepository, WeightRepository>();
 builder.Services.AddScoped<IRarityRepository, RarityRepository>();
+builder.Services.AddScoped<IEggGroupRepository, EggGroupRepository>();
 builder.Services.AddScoped<IResourceMaker, ResourceMaker>();
 
 builder.Services.AddCors();
