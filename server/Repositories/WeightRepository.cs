@@ -34,6 +34,11 @@ namespace PrimalAPI.Repositories
             return _context.Weight.Count();
         }
 
+        public Weight? GetWeightByPokemonId(int pokemonId)
+        {
+            return _context.Weight.Where(w => w.Pokemon.Any(p => p.Id == pokemonId)).FirstOrDefault();
+        }
+
         public ICollection<Weight> GetAllWeights()
         {
             return _context.Weight.OrderBy(w => w.Id).ToList();

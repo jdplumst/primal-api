@@ -9,6 +9,7 @@ namespace PrimalAPI.Interfaces
         Weight? GetWeightByName(string weightName);
         ICollection<Weight> GetWeights(PaginationQuery paginationQuery);
         int GetWeightCount();
+        Weight? GetWeightByPokemonId(int pokemonId);
         ICollection<Weight> GetAllWeights();
     }
 }
