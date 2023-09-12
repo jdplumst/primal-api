@@ -49,6 +49,11 @@ namespace PrimalAPI.Repositories
             return _context.Pokemon.Where(p => p.RarityId == rarityId).OrderBy(p => p.Id).ToList();
         }
 
+        public ICollection<Pokemon> GetPokemonByEggGroupId(int eggGroupId)
+        {
+            return _context.Pokemon.Where(p => p.EggGroup.Any(e => e.Id == eggGroupId)).ToList();
+        }
+
         public ICollection<Pokemon> GetRandomPokemonFromHabitat(string habitatName, int count)
         {
             return _context.Pokemon

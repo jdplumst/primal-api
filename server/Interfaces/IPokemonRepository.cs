@@ -11,6 +11,7 @@ namespace PrimalAPI.Interfaces
         ICollection<Pokemon> GetPokemonByWeightId(int weightId);
         ICollection<Pokemon> GetPokemonByWeightName(string weightName);
         ICollection<Pokemon> GetPokemonByRarityId(int rarityId);
+        ICollection<Pokemon> GetPokemonByEggGroupId(int eggGroupId);
         ICollection<Pokemon> GetRandomPokemonFromHabitat(string habitatName, int count);
     }
 }
