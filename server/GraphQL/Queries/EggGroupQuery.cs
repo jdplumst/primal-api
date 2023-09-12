@@ -21,5 +21,21 @@ namespace PrimalAPI.GraphQL.Queries
             }
             return new EggGroupGraphQLDto(eggGroup.Id, eggGroup.Name);
         }
+
+        [GraphQLDescription("Get a specific egg group by name")]
+        public EggGroupGraphQLDto? GetEggGroupByName(
+            string name,
+            IEggGroupRepository eggGroupRepository,
+            [Service] ILogger<EggGroupQuery> logger)
+        {
+            logger.LogInformation($"Getting Egg Group by Name {name} (GraphQL)");
+            var eggGroup = eggGroupRepository.GetEggGroupByName(name);
+            if (eggGroup == null)
+            {
+                logger.LogWarning($"Egg Group with Name {name} was not found (GraphQL)");
+                return null;
+            }
+            return new EggGroupGraphQLDto(eggGroup.Id, eggGroup.Name);
+        }
     }
 }
