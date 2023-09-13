@@ -87,5 +87,13 @@ namespace PrimalAPI.Repositories
                 .Take(count)
                 .ToList();
         }
+
+        public Pokemon GetRandomPokemonFromEggGroup(string eggGroupName)
+        {
+            return _context.Pokemon
+                .Where(p => p.EggGroup.Any(e => e.Name.ToLower() == eggGroupName.ToLower()))
+                .OrderBy(p => Guid.NewGuid())
+                .FirstOrDefault()!;
+        }
     }
 }

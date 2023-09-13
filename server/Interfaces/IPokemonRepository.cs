@@ -13,5 +13,6 @@ namespace PrimalAPI.Interfaces
         ICollection<Pokemon> GetPokemonByRarityId(int rarityId);
         ICollection<Pokemon> GetPokemonByEggGroupId(int eggGroupId);
         ICollection<Pokemon> GetRandomPokemonFromHabitat(string habitatName, int count);
+        Pokemon GetRandomPokemonFromEggGroup(string eggGroupName);
     }
 }

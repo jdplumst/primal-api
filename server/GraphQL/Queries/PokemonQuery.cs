@@ -31,5 +31,26 @@ namespace PrimalAPI.GraphQL.Queries
             }
             return pokemonList;
         }
+
+        [GraphQLDescription("Get a random Pokemon from a specific egg group")]
+        public PokemonGraphQLDto GetRandomPokemonFromEggGroup(
+            string eggGroupName,
+            IPokemonRepository pokemonRepository,
+            [Service] ILogger<PokemonQuery> logger)
+        {
+            logger.LogInformation($"Getting a random Pokemon from Egg Group {eggGroupName} (GraphQL)");
+            var pokemon = pokemonRepository.GetRandomPokemonFromEggGroup(eggGroupName);
+            var pokemonDto = new PokemonGraphQLDto(
+                pokemon.Id,
+                pokemon.Name,
+                pokemon.HP,
+                pokemon.Attack,
+                pokemon.SpecialAttack,
+                pokemon.Defense,
+                pokemon.SpecialDefense,
+                pokemon.Speed,
+                pokemon.HatchRate);
+            return pokemonDto;
+        }
     }
 }
