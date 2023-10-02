@@ -14,7 +14,11 @@ namespace PrimalAPI.Controllers
         private readonly IResourceMaker _resourceMaker;
         private readonly ILogger<SizeController> _logger;
 
-        public SizeController(ISizeRepository sizeRepository, IPokemonRepository pokemonRepository, IResourceMaker resourceMaker, ILogger<SizeController> logger)
+        public SizeController(
+            ISizeRepository sizeRepository,
+            IPokemonRepository pokemonRepository,
+            IResourceMaker resourceMaker,
+            ILogger<SizeController> logger)
         {
             _sizeRepository = sizeRepository;
             _pokemonRepository = pokemonRepository;
@@ -58,7 +62,8 @@ namespace PrimalAPI.Controllers
         [ProducesResponseType(200, Type = typeof(PageDto<ICollection<SizeDto>>))]
         public IActionResult GetSizes([FromQuery] PaginationQuery paginationQuery)
         {
-            _logger.LogInformation($"Getting all Sizes on page {paginationQuery.PageNumber} with {paginationQuery.PageSize} items");
+            _logger.LogInformation($"Getting all Sizes on page {paginationQuery.PageNumber} " +
+            "with {paginationQuery.PageSize} items");
             var sizes = _sizeRepository.GetSizes(paginationQuery);
             var sizeDtos = new List<SizeDto>();
             foreach (var size in sizes)
@@ -67,7 +72,7 @@ namespace PrimalAPI.Controllers
                 var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
                 sizeDtos.Add(new SizeDto(size.Id, size.Name, size.Space, pokemonList));
             }
-            var info = new InfoDto(paginationQuery.PageNumber, paginationQuery.PageSize, _sizeRepository.GetSizeCount());
+            var info = new InfoDto(paginationQuery, _sizeRepository.GetSizeCount());
             var pageDto = new PageDto<ICollection<SizeDto>>(sizeDtos, info);
             return Ok(pageDto);
         }

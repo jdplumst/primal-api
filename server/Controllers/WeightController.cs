@@ -14,7 +14,11 @@ namespace PrimalAPI.Controllers
         private readonly IResourceMaker _resourceMaker;
         private readonly ILogger<WeightController> _logger;
 
-        public WeightController(IWeightRepository weightRepository, IPokemonRepository pokemonRepository, IResourceMaker resourceMaker, ILogger<WeightController> logger)
+        public WeightController(
+            IWeightRepository weightRepository,
+            IPokemonRepository pokemonRepository,
+            IResourceMaker resourceMaker,
+            ILogger<WeightController> logger)
         {
             _weightRepository = weightRepository;
             _pokemonRepository = pokemonRepository;
@@ -58,7 +62,8 @@ namespace PrimalAPI.Controllers
         [ProducesResponseType(200, Type = typeof(PageDto<ICollection<WeightDto>>))]
         public IActionResult GetWeights([FromQuery] PaginationQuery paginationQuery)
         {
-            _logger.LogInformation($"Getting all Weights on page {paginationQuery.PageNumber} with {paginationQuery.PageSize} items");
+            _logger.LogInformation($"Getting all Weights on page {paginationQuery.PageNumber} " +
+            "with {paginationQuery.PageSize} items");
             var weights = _weightRepository.GetWeights(paginationQuery);
             var weightDtos = new List<WeightDto>();
             foreach (var weight in weights)
@@ -67,7 +72,7 @@ namespace PrimalAPI.Controllers
                 var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
                 weightDtos.Add(new WeightDto(weight.Id, weight.Name, weight.Range, pokemonList));
             }
-            var info = new InfoDto(paginationQuery.PageNumber, paginationQuery.PageSize, _weightRepository.GetWeightCount());
+            var info = new InfoDto(paginationQuery, _weightRepository.GetWeightCount());
             var pageDto = new PageDto<ICollection<WeightDto>>(weightDtos, info);
             return Ok(pageDto);
         }
