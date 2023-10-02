@@ -3,8 +3,8 @@
     public class Proficiency
     {
         public int Id { get; set; }
-        public string Name { get; set; } = default!;
-        public ICollection<Pokemon> Pokemon { get; set; } = default!;
-        public ICollection<Move> Move { get; set; } = default!;
+        public required string Name { get; set; }
+        public required ICollection<Pokemon> Pokemon { get; set; }
+        public required ICollection<Move> Move { get; set; }
     }
 }

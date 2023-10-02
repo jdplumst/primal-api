@@ -3,8 +3,8 @@
     public class Size
     {
         public int Id { get; set; }
-        public string Name { get; set; } = default!;
-        public string Space { get; set; } = default!;
-        public ICollection<Pokemon> Pokemon { get; set; } = default!;
+        public required string Name { get; set; }
+        public required string Space { get; set; }
+        public required ICollection<Pokemon> Pokemon { get; set; }
     }
 }

@@ -3,24 +3,24 @@
     public class Pokemon
     {
         public int Id { get; set; }
-        public string Name { get; set; } = default!;
-        public int HP { get; set; } = default!;
-        public int Attack { get; set; } = default!;
-        public int SpecialAttack { get; set; } = default!;
-        public int Defense { get; set; } = default!;
-        public int SpecialDefense { get; set; } = default!;
-        public int Speed { get; set; } = default!;
-        public ICollection<Type> Type { get; set; } = default!;
-        public int SizeId { get; set; } = default!;
-        public int WeightId { get; set; } = default!;
-        public ICollection<EggGroup> EggGroup { get; set; } = default!;
-        public string HatchRate { get; set; } = default!;
-        public ICollection<Diet> Diet { get; set; } = default!;
-        public ICollection<Habitat> Habitat { get; set; } = default!;
-        public ICollection<Proficiency> Proficiency { get; set; } = default!;
-        public ICollection<Skill> Skill { get; set; } = default!;
-        public ICollection<Passive> Passive { get; set; } = default!;
-        public ICollection<Move> Move { get; set; } = default!;
-        public int RarityId { get; set; } = default!;
+        public required string Name { get; set; }
+        public required int HP { get; set; }
+        public required int Attack { get; set; }
+        public required int SpecialAttack { get; set; }
+        public required int Defense { get; set; }
+        public required int SpecialDefense { get; set; }
+        public required int Speed { get; set; }
+        public required ICollection<Type> Type { get; set; }
+        public required int SizeId { get; set; }
+        public required int WeightId { get; set; }
+        public required ICollection<EggGroup> EggGroup { get; set; }
+        public required string HatchRate { get; set; }
+        public required ICollection<Diet> Diet { get; set; }
+        public required ICollection<Habitat> Habitat { get; set; }
+        public required ICollection<Proficiency> Proficiency { get; set; }
+        public required ICollection<Skill> Skill { get; set; }
+        public required ICollection<Passive> Passive { get; set; }
+        public required ICollection<Move> Move { get; set; }
+        public required int RarityId { get; set; }
     }
 }

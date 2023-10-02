@@ -3,10 +3,10 @@
     public class Passive
     {
         public int Id { get; set; }
-        public string Name { get; set; } = default!;
-        public string Description { get; set; } = default!;
-        public PassiveType Type { get; set; } = default!;
-        public ICollection<Pokemon> Pokemon { get; set; } = default!;
+        public required string Name { get; set; }
+        public required string Description { get; set; }
+        public required PassiveType Type { get; set; }
+        public required ICollection<Pokemon> Pokemon { get; set; }
     }
 
     public enum PassiveType

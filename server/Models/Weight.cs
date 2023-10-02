@@ -3,8 +3,8 @@
     public class Weight
     {
         public int Id { get; set; }
-        public string Name { get; set; } = default!;
-        public string Range { get; set; } = default!;
-        public ICollection<Pokemon> Pokemon { get; set; } = default!;
+        public required string Name { get; set; }
+        public required string Range { get; set; }
+        public required ICollection<Pokemon> Pokemon { get; set; }
     }
 }
