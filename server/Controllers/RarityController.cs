@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PrimalAPI.Dto;
 using PrimalAPI.Interfaces;
+using PrimalAPI.Queries;
 
 namespace PrimalAPI.Controllers
 {
@@ -56,6 +57,25 @@ namespace PrimalAPI.Controllers
 			var pokemons = _pokemonRepository.GetPokemonByRarityId(rarity.Id);
 			var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
 			return Ok(new RarityDto(rarity.Id, rarity.Name, rarity.Description, pokemonList));
+		}
+
+		[HttpGet]
+		[ProducesResponseType(200, Type = typeof(PageDto<ICollection<RarityDto>>))]
+		public IActionResult GetRarities([FromQuery] PaginationQuery paginationQuery)
+		{
+			_logger.LogInformation($"Getting all Rarities on page {paginationQuery.PageNumber} " +
+			"with {paginationQuery.PageSize} items");
+			var rarities = _rarityRepository.GetRarities(paginationQuery);
+			var rarityDtos = new List<RarityDto>();
+			foreach (var rarity in rarities)
+			{
+				var pokemons = _pokemonRepository.GetPokemonByRarityId(rarity.Id);
+				var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
+				rarityDtos.Add(new RarityDto(rarity.Id, rarity.Name, rarity.Description, pokemonList));
+			}
+			var info = new InfoDto(paginationQuery, _rarityRepository.GetRarityCount());
+			var pageDto = new PageDto<ICollection<RarityDto>>(rarityDtos, info);
+			return Ok(pageDto);
 		}
 	}
 }

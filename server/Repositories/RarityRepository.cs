@@ -1,5 +1,6 @@
 ﻿using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
+using PrimalAPI.Queries;
 
 namespace PrimalAPI.Repositories
 {
@@ -17,6 +18,17 @@ namespace PrimalAPI.Repositories
         public Rarity? GetRarityByName(string rarityName)
         {
             return _context.Rarity.Where(r => r.Name.ToLower() == rarityName.ToLower()).FirstOrDefault();
+        }
+
+        public ICollection<Rarity> GetRarities(PaginationQuery paginationQuery)
+        {
+            var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
+            return _context.Rarity.OrderBy(r => r.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
+        }
+
+        public int GetRarityCount()
+        {
+            return _context.Rarity.Count();
         }
 
         public Rarity? GetRarityByPokemonId(int pokemonId)

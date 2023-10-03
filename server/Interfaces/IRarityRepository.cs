@@ -1,4 +1,5 @@
 ﻿using PrimalAPI.Models;
+using PrimalAPI.Queries;
 
 namespace PrimalAPI.Interfaces
 {
@@ -6,6 +7,8 @@ namespace PrimalAPI.Interfaces
     {
         Rarity? GetRarityById(int rarityId);
         Rarity? GetRarityByName(string rarityName);
+        ICollection<Rarity> GetRarities(PaginationQuery paginationQuery);
+        int GetRarityCount();
         Rarity? GetRarityByPokemonId(int pokemonId);
         ICollection<Rarity> GetAllRarities();
     }

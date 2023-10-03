@@ -68,7 +68,7 @@ namespace PrimalAPI.Controllers
             var weightDtos = new List<WeightDto>();
             foreach (var weight in weights)
             {
-                var pokemons = _pokemonRepository.GetPokemonBySizeId(weight.Id);
+                var pokemons = _pokemonRepository.GetPokemonByWeightId(weight.Id);
                 var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
                 weightDtos.Add(new WeightDto(weight.Id, weight.Name, weight.Range, pokemonList));
             }
