@@ -37,9 +37,25 @@ namespace PrimalAPI.Controllers
 				_logger.LogWarning($"Rarity with Id {id} was not found");
 				return NotFound();
 			}
-			var pokemons = _pokemonRepository.GetPokemonByHabitatId(id);
+			var pokemons = _pokemonRepository.GetPokemonByRarityId(id);
 			var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
 			return Ok(new RarityDto(id, rarity.Name, rarity.Description, pokemonList));
+		}
+
+		[HttpGet("{name}")]
+		[ProducesResponseType(200, Type = typeof(RarityDto))]
+		public IActionResult GetRarityByName(string name)
+		{
+			_logger.LogInformation($"Getting Rarity by Name {name}");
+			var rarity = _rarityRepository.GetRarityByName(name);
+			if (rarity == null)
+			{
+				_logger.LogWarning($"Rarity with Name {name} was not found");
+				return NotFound();
+			}
+			var pokemons = _pokemonRepository.GetPokemonByRarityId(rarity.Id);
+			var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
+			return Ok(new RarityDto(rarity.Id, rarity.Name, rarity.Description, pokemonList));
 		}
 	}
 }
