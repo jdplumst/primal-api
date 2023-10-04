@@ -40,5 +40,21 @@ namespace PrimalAPI.Controllers
             var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
             return Ok(new EggGroupDto(id, eggGroup.Name, pokemonList));
         }
+
+        [HttpGet("{name}")]
+        [ProducesResponseType(200, Type = typeof(EggGroupDto))]
+        public IActionResult GetRarityByName(string name)
+        {
+            _logger.LogInformation($"Getting Egg Group by Name {name}");
+            var eggGroup = _eggGroupRepository.GetEggGroupByName(name);
+            if (eggGroup == null)
+            {
+                _logger.LogWarning($"Egg Group with Name {name} was not found");
+                return NotFound();
+            }
+            var pokemons = _pokemonRepository.GetPokemonByEggGroupId(eggGroup.Id);
+            var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
+            return Ok(new EggGroupDto(eggGroup.Id, eggGroup.Name, pokemonList));
+        }
     }
 }
