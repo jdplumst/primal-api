@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PrimalAPI.Dto;
 using PrimalAPI.Interfaces;
+using PrimalAPI.Queries;
 
 namespace PrimalAPI.Controllers
 {
@@ -55,6 +56,25 @@ namespace PrimalAPI.Controllers
             var pokemons = _pokemonRepository.GetPokemonByEggGroupId(eggGroup.Id);
             var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
             return Ok(new EggGroupDto(eggGroup.Id, eggGroup.Name, pokemonList));
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(PageDto<ICollection<EggGroupDto>>))]
+        public IActionResult GetEggGroups([FromQuery] PaginationQuery paginationQuery)
+        {
+            _logger.LogInformation($"Getting all Egg Groups on page {paginationQuery.PageNumber} " +
+            "with {paginationQuery.PageSize} items");
+            var eggGroups = _eggGroupRepository.GetEggGroups(paginationQuery);
+            var eggGroupDtos = new List<EggGroupDto>();
+            foreach (var eggGroup in eggGroups)
+            {
+                var pokemons = _pokemonRepository.GetPokemonByEggGroupId(eggGroup.Id);
+                var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
+                eggGroupDtos.Add(new EggGroupDto(eggGroup.Id, eggGroup.Name, pokemonList));
+            }
+            var info = new InfoDto(paginationQuery, _eggGroupRepository.GetEggGroupCount());
+            var pageDto = new PageDto<ICollection<EggGroupDto>>(eggGroupDtos, info);
+            return Ok(pageDto);
         }
     }
 }
