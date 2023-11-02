@@ -79,6 +79,13 @@ namespace PrimalAPI.Repositories
                 .ToList();
         }
 
+        public ICollection<Pokemon> GetPokemonBySkillId(int skillId)
+        {
+            return _context.Pokemon
+                .Where(p => p.Skill.Any(s => s.Id == skillId))
+                .ToList();
+        }
+
         public ICollection<Pokemon> GetRandomPokemonFromHabitat(string habitatName, int count)
         {
             return _context.Pokemon
