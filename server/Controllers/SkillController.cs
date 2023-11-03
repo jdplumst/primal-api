@@ -42,5 +42,21 @@ namespace PrimalAPI.Controllers
             var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
             return Ok(new SkillDto(id, skill.Name, skill.Description, pokemonList));
         }
+
+        [HttpGet("{name}")]
+        [ProducesResponseType(200, Type = typeof(SkillDto))]
+        public IActionResult GetSkillByName(string name)
+        {
+            _logger.LogInformation($"Getting Skill by Name {name}");
+            var skill = _skillRepository.GetSkillByName(name);
+            if (skill == null)
+            {
+                _logger.LogWarning($"Skill with Name {name} was not found");
+                return NotFound();
+            }
+            var pokemons = _pokemonRepository.GetPokemonBySkillId(skill.Id);
+            var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
+            return Ok(new SkillDto(skill.Id, skill.Name, skill.Description, pokemonList));
+        }
     }
 }

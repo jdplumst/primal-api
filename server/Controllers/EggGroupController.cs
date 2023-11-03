@@ -44,7 +44,7 @@ namespace PrimalAPI.Controllers
 
         [HttpGet("{name}")]
         [ProducesResponseType(200, Type = typeof(EggGroupDto))]
-        public IActionResult GetRarityByName(string name)
+        public IActionResult GetEggGroupByName(string name)
         {
             _logger.LogInformation($"Getting Egg Group by Name {name}");
             var eggGroup = _eggGroupRepository.GetEggGroupByName(name);
