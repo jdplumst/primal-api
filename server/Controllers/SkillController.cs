@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PrimalAPI.Dto;
 using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
+using PrimalAPI.Queries;
 
 namespace PrimalAPI.Controllers
 {
@@ -57,6 +58,25 @@ namespace PrimalAPI.Controllers
             var pokemons = _pokemonRepository.GetPokemonBySkillId(skill.Id);
             var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
             return Ok(new SkillDto(skill.Id, skill.Name, skill.Description, pokemonList));
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200, Type = typeof(PageDto<ICollection<SkillDto>>))]
+        public IActionResult GetSkills([FromQuery] PaginationQuery paginationQuery)
+        {
+            _logger.LogInformation($"Getting all Skills on page {paginationQuery.PageNumber} " +
+            "with {paginationQuery.PageSize} items");
+            var skills = _skillRepository.GetSkills(paginationQuery);
+            var skillDtos = new List<SkillDto>();
+            foreach (var skill in skills)
+            {
+                var pokemons = _pokemonRepository.GetPokemonBySkillId(skill.Id);
+                var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
+                skillDtos.Add(new SkillDto(skill.Id, skill.Name, skill.Description, pokemonList));
+            }
+            var info = new InfoDto(paginationQuery, _skillRepository.GetSkillCount());
+            var pageDto = new PageDto<ICollection<SkillDto>>(skillDtos, info);
+            return Ok(pageDto);
         }
     }
 }
