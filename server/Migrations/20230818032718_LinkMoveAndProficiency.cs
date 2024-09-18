@@ -15,36 +15,42 @@ namespace PrimalAPI.Migrations
                 columns: table => new
                 {
                     MovesId = table.Column<int>(type: "integer", nullable: false),
-                    ProficienciesId = table.Column<int>(type: "integer", nullable: false)
+                    ProficienciesId = table.Column<int>(type: "integer", nullable: false),
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MoveProficiency", x => new { x.MovesId, x.ProficienciesId });
+                    table.PrimaryKey(
+                        "PK_MoveProficiency",
+                        x => new { x.MovesId, x.ProficienciesId }
+                    );
                     table.ForeignKey(
                         name: "FK_MoveProficiency_Move_MovesId",
                         column: x => x.MovesId,
                         principalTable: "Move",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Cascade
+                    );
                     table.ForeignKey(
                         name: "FK_MoveProficiency_Proficiency_ProficienciesId",
                         column: x => x.ProficienciesId,
                         principalTable: "Proficiency",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_MoveProficiency_ProficienciesId",
                 table: "MoveProficiency",
-                column: "ProficienciesId");
+                column: "ProficienciesId"
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "MoveProficiency");
+            migrationBuilder.DropTable(name: "MoveProficiency");
         }
     }
 }

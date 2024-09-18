@@ -16,7 +16,8 @@ namespace PrimalAPI.Migrations
                 type: "text",
                 nullable: false,
                 oldClrType: typeof(int),
-                oldType: "integer");
+                oldType: "integer"
+            );
         }
 
         /// <inheritdoc />
@@ -28,7 +29,8 @@ namespace PrimalAPI.Migrations
                 type: "integer",
                 nullable: false,
                 oldClrType: typeof(string),
-                oldType: "text");
+                oldType: "text"
+            );
         }
     }
 }

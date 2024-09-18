@@ -15,15 +15,14 @@ namespace PrimalAPI.Migrations
                 table: "Diet",
                 type: "text",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Description",
-                table: "Diet");
+            migrationBuilder.DropColumn(name: "Description", table: "Diet");
         }
     }
 }

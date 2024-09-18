@@ -1,7 +1,7 @@
-﻿using PrimalAPI.Interfaces;
+﻿using PrimalAPI.Helpers;
+using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
 using PrimalAPI.Queries;
-using PrimalAPI.Helpers;
 
 namespace PrimalAPI.Repositories
 {
@@ -36,7 +36,9 @@ namespace PrimalAPI.Repositories
 
             try
             {
-                size = _context.Size.Where(s => s.Name.ToLower() == name.ToLower()).FirstOrDefault();
+                size = _context
+                    .Size.Where(s => s.Name.ToLower() == name.ToLower())
+                    .FirstOrDefault();
             }
             catch (Exception e)
             {
@@ -49,7 +51,11 @@ namespace PrimalAPI.Repositories
         public ICollection<Size> GetSizes(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.Size.OrderBy(s => s.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
+            return _context
+                .Size.OrderBy(s => s.Id)
+                .Skip(skip)
+                .Take(paginationQuery.PageSize)
+                .ToList();
         }
 
         public int GetSizeCount()

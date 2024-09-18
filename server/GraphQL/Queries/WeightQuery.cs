@@ -10,7 +10,8 @@ namespace PrimalAPI.GraphQL.Queries
         public WeightGraphQLDto? GetWeightById(
             int id,
             IWeightRepository weightRepository,
-            [Service] ILogger<WeightQuery> logger)
+            [Service] ILogger<WeightQuery> logger
+        )
         {
             logger.LogInformation($"Getting Weight by Id {id} (GraphQL)");
             var weight = weightRepository.GetWeightById(id);
@@ -26,7 +27,8 @@ namespace PrimalAPI.GraphQL.Queries
         public WeightGraphQLDto? GetWeightByName(
             string name,
             IWeightRepository weightRepository,
-            [Service] ILogger<WeightQuery> logger)
+            [Service] ILogger<WeightQuery> logger
+        )
         {
             logger.LogInformation($"Getting Weight by Name {name} (GraphQL)");
             var weight = weightRepository.GetWeightByName(name);
@@ -42,7 +44,8 @@ namespace PrimalAPI.GraphQL.Queries
         [UsePaging]
         public ICollection<WeightGraphQLDto> GetWeights(
             IWeightRepository weightRepository,
-            [Service] ILogger<WeightQuery> logger)
+            [Service] ILogger<WeightQuery> logger
+        )
         {
             logger.LogInformation($"Getting all weights (GraphQL)");
             var weights = weightRepository.GetAllWeights();

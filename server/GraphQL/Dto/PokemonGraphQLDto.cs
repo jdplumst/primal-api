@@ -35,7 +35,8 @@ namespace PrimalAPI.GraphQL.Dto
         [GraphQLDescription("The size of the Pokemon")]
         public SizeGraphQLDto GetSize(
             [Parent] PokemonGraphQLDto pokemon,
-            ISizeRepository sizeRepository)
+            ISizeRepository sizeRepository
+        )
         {
             var size = sizeRepository.GetSizeByPokemonId(pokemon.Id);
             return new SizeGraphQLDto(size!.Id, size.Name, size.Space);
@@ -44,7 +45,8 @@ namespace PrimalAPI.GraphQL.Dto
         [GraphQLDescription("The weight class of the Pokemon")]
         public WeightGraphQLDto GetWeight(
             [Parent] PokemonGraphQLDto pokemon,
-            IWeightRepository weightRepository)
+            IWeightRepository weightRepository
+        )
         {
             var weight = weightRepository.GetWeightByPokemonId(pokemon.Id);
             return new WeightGraphQLDto(weight!.Id, weight.Name, weight.Range);
@@ -53,7 +55,8 @@ namespace PrimalAPI.GraphQL.Dto
         [GraphQLDescription("A list of the egg groups of this Pokemon")]
         public ICollection<EggGroupGraphQLDto> GetEggGroups(
             [Parent] PokemonGraphQLDto pokemon,
-            IEggGroupRepository eggGroupRepository)
+            IEggGroupRepository eggGroupRepository
+        )
         {
             var eggGroups = eggGroupRepository.GetEggGroupByPokemonId(pokemon.Id);
             var eggGroupList = new List<EggGroupGraphQLDto>();
@@ -72,13 +75,16 @@ namespace PrimalAPI.GraphQL.Dto
         [GraphQLDescription("A list of habitats that this Pokemon can be found in")]
         public ICollection<HabitatGraphQLDto> GetHabitats(
             [Parent] PokemonGraphQLDto pokemon,
-            IHabitatRepository habitatRepository)
+            IHabitatRepository habitatRepository
+        )
         {
             var habitats = habitatRepository.GetHabitatsByPokemonId(pokemon.Id);
             var habitatList = new List<HabitatGraphQLDto>();
             foreach (var habitat in habitats)
             {
-                habitatList.Add(new HabitatGraphQLDto(habitat.Id, habitat.Name, habitat.Description));
+                habitatList.Add(
+                    new HabitatGraphQLDto(habitat.Id, habitat.Name, habitat.Description)
+                );
             }
             return habitatList;
         }
@@ -94,7 +100,8 @@ namespace PrimalAPI.GraphQL.Dto
         [GraphQLDescription("The rarity of the Pokemon")]
         public RarityGraphQLDto GetRarity(
             [Parent] PokemonGraphQLDto pokemon,
-            IRarityRepository rarityRepository)
+            IRarityRepository rarityRepository
+        )
         {
             var rarity = rarityRepository.GetRarityByPokemonId(pokemon.Id);
             return new RarityGraphQLDto(rarity!.Id, rarity.Name, rarity.Description);
@@ -109,7 +116,8 @@ namespace PrimalAPI.GraphQL.Dto
             int defense,
             int specialDefense,
             int speed,
-            string hatchRate)
+            string hatchRate
+        )
         {
             Id = id;
             Name = name;

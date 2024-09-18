@@ -10,7 +10,8 @@ namespace PrimalAPI.GraphQL.Queries
         public RarityGraphQLDto? GetRarityById(
             int id,
             IRarityRepository rarityRepository,
-            [Service] ILogger<RarityQuery> logger)
+            [Service] ILogger<RarityQuery> logger
+        )
         {
             logger.LogInformation($"Getting Rarity by Id {id} (GraphQL)");
             var rarity = rarityRepository.GetRarityById(id);
@@ -26,7 +27,8 @@ namespace PrimalAPI.GraphQL.Queries
         public RarityGraphQLDto? GetRarityByName(
             string name,
             IRarityRepository rarityRepository,
-            [Service] ILogger<RarityQuery> logger)
+            [Service] ILogger<RarityQuery> logger
+        )
         {
             logger.LogInformation($"Getting Rarity by Name {name} (GraphQL)");
             var rarity = rarityRepository.GetRarityByName(name);
@@ -42,7 +44,8 @@ namespace PrimalAPI.GraphQL.Queries
         [UsePaging]
         public ICollection<RarityGraphQLDto> GetRarities(
             IRarityRepository rarityRepository,
-            [Service] ILogger<RarityQuery> logger)
+            [Service] ILogger<RarityQuery> logger
+        )
         {
             logger.LogInformation($"Getting All Rarities (GraphQL)");
             var rarities = rarityRepository.GetAllRarities();

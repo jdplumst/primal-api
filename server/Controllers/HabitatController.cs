@@ -18,7 +18,8 @@ namespace PrimalAPI.Controllers
             IHabitatRepository habitatRepository,
             IPokemonRepository pokemonRepository,
             IResourceMaker resourceMaker,
-            ILogger<HabitatController> logger)
+            ILogger<HabitatController> logger
+        )
         {
             _habitatRepository = habitatRepository;
             _pokemonRepository = pokemonRepository;
@@ -62,15 +63,19 @@ namespace PrimalAPI.Controllers
         [ProducesResponseType(200, Type = typeof(PageDto<ICollection<HabitatDto>>))]
         public IActionResult GetAllHabitats([FromQuery] PaginationQuery paginationQuery)
         {
-            _logger.LogInformation($"Getting all Habitats on page {paginationQuery.PageNumber} " +
-            "with {paginationQuery.PageSize} items");
+            _logger.LogInformation(
+                $"Getting all Habitats on page {paginationQuery.PageNumber} "
+                    + "with {paginationQuery.PageSize} items"
+            );
             var habitats = _habitatRepository.GetHabitats(paginationQuery);
             var habitatDtos = new List<HabitatDto>();
             foreach (var habitat in habitats)
             {
                 var pokemons = _pokemonRepository.GetPokemonByHabitatId(habitat.Id);
                 var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
-                habitatDtos.Add(new HabitatDto(habitat.Id, habitat.Name, habitat.Description, pokemonList));
+                habitatDtos.Add(
+                    new HabitatDto(habitat.Id, habitat.Name, habitat.Description, pokemonList)
+                );
             }
             var infoDto = new InfoDto(paginationQuery, _habitatRepository.GetHabitatCount());
             return Ok(new PageDto<ICollection<HabitatDto>>(habitatDtos, infoDto));

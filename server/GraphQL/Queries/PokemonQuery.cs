@@ -11,23 +11,29 @@ namespace PrimalAPI.GraphQL.Queries
             string habitatName,
             int count,
             IPokemonRepository pokemonRepository,
-            [Service] ILogger<PokemonQuery> logger)
+            [Service] ILogger<PokemonQuery> logger
+        )
         {
-            logger.LogInformation($"Getting {count} Random Pokemon from Habitat {habitatName} (GraphQL)");
+            logger.LogInformation(
+                $"Getting {count} Random Pokemon from Habitat {habitatName} (GraphQL)"
+            );
             var pokemons = pokemonRepository.GetRandomPokemonFromHabitat(habitatName, count);
             var pokemonList = new List<PokemonGraphQLDto>();
             foreach (var pokemon in pokemons)
             {
-                pokemonList.Add(new PokemonGraphQLDto(
-                    pokemon.Id,
-                    pokemon.Name,
-                    pokemon.HP,
-                    pokemon.Attack,
-                    pokemon.SpecialAttack,
-                    pokemon.Defense,
-                    pokemon.SpecialDefense,
-                    pokemon.Speed,
-                    pokemon.HatchRate));
+                pokemonList.Add(
+                    new PokemonGraphQLDto(
+                        pokemon.Id,
+                        pokemon.Name,
+                        pokemon.HP,
+                        pokemon.Attack,
+                        pokemon.SpecialAttack,
+                        pokemon.Defense,
+                        pokemon.SpecialDefense,
+                        pokemon.Speed,
+                        pokemon.HatchRate
+                    )
+                );
             }
             return pokemonList;
         }
@@ -36,9 +42,12 @@ namespace PrimalAPI.GraphQL.Queries
         public PokemonGraphQLDto GetRandomPokemonFromEggGroup(
             string eggGroupName,
             IPokemonRepository pokemonRepository,
-            [Service] ILogger<PokemonQuery> logger)
+            [Service] ILogger<PokemonQuery> logger
+        )
         {
-            logger.LogInformation($"Getting a random Pokemon from Egg Group {eggGroupName} (GraphQL)");
+            logger.LogInformation(
+                $"Getting a random Pokemon from Egg Group {eggGroupName} (GraphQL)"
+            );
             var pokemon = pokemonRepository.GetRandomPokemonFromEggGroup(eggGroupName);
             var pokemonDto = new PokemonGraphQLDto(
                 pokemon.Id,
@@ -49,7 +58,8 @@ namespace PrimalAPI.GraphQL.Queries
                 pokemon.Defense,
                 pokemon.SpecialDefense,
                 pokemon.Speed,
-                pokemon.HatchRate);
+                pokemon.HatchRate
+            );
             return pokemonDto;
         }
     }

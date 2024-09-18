@@ -12,20 +12,18 @@ namespace PrimalAPI.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_PokemonProficiency_Prociciency_ProficienciesId",
-                table: "PokemonProficiency");
+                table: "PokemonProficiency"
+            );
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Prociciency",
-                table: "Prociciency");
+            migrationBuilder.DropPrimaryKey(name: "PK_Prociciency", table: "Prociciency");
 
-            migrationBuilder.RenameTable(
-                name: "Prociciency",
-                newName: "Proficiency");
+            migrationBuilder.RenameTable(name: "Prociciency", newName: "Proficiency");
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_Proficiency",
                 table: "Proficiency",
-                column: "Id");
+                column: "Id"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PokemonProficiency_Proficiency_ProficienciesId",
@@ -33,7 +31,8 @@ namespace PrimalAPI.Migrations
                 column: "ProficienciesId",
                 principalTable: "Proficiency",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         /// <inheritdoc />
@@ -41,20 +40,18 @@ namespace PrimalAPI.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_PokemonProficiency_Proficiency_ProficienciesId",
-                table: "PokemonProficiency");
+                table: "PokemonProficiency"
+            );
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Proficiency",
-                table: "Proficiency");
+            migrationBuilder.DropPrimaryKey(name: "PK_Proficiency", table: "Proficiency");
 
-            migrationBuilder.RenameTable(
-                name: "Proficiency",
-                newName: "Prociciency");
+            migrationBuilder.RenameTable(name: "Proficiency", newName: "Prociciency");
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_Prociciency",
                 table: "Prociciency",
-                column: "Id");
+                column: "Id"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PokemonProficiency_Prociciency_ProficienciesId",
@@ -62,7 +59,8 @@ namespace PrimalAPI.Migrations
                 column: "ProficienciesId",
                 principalTable: "Prociciency",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
     }
 }

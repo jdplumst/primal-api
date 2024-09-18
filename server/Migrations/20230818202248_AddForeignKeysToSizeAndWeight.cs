@@ -13,12 +13,14 @@ namespace PrimalAPI.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Pokemon_SizeId",
                 table: "Pokemon",
-                column: "SizeId");
+                column: "SizeId"
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pokemon_WeightId",
                 table: "Pokemon",
-                column: "WeightId");
+                column: "WeightId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Pokemon_Size_SizeId",
@@ -26,7 +28,8 @@ namespace PrimalAPI.Migrations
                 column: "SizeId",
                 principalTable: "Size",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Pokemon_Weight_WeightId",
@@ -34,27 +37,20 @@ namespace PrimalAPI.Migrations
                 column: "WeightId",
                 principalTable: "Weight",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Pokemon_Size_SizeId",
-                table: "Pokemon");
+            migrationBuilder.DropForeignKey(name: "FK_Pokemon_Size_SizeId", table: "Pokemon");
 
-            migrationBuilder.DropForeignKey(
-                name: "FK_Pokemon_Weight_WeightId",
-                table: "Pokemon");
+            migrationBuilder.DropForeignKey(name: "FK_Pokemon_Weight_WeightId", table: "Pokemon");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Pokemon_SizeId",
-                table: "Pokemon");
+            migrationBuilder.DropIndex(name: "IX_Pokemon_SizeId", table: "Pokemon");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Pokemon_WeightId",
-                table: "Pokemon");
+            migrationBuilder.DropIndex(name: "IX_Pokemon_WeightId", table: "Pokemon");
         }
     }
 }

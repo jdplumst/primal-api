@@ -13,7 +13,6 @@
             Name = name;
             Description = description;
             Pokemon = pokemon;
-
         }
     }
 }

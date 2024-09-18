@@ -10,7 +10,8 @@ namespace PrimalAPI.GraphQL.Queries
         public HabitatGraphQLDto? GetHabitatById(
             int id,
             IHabitatRepository habitatRepository,
-            [Service] ILogger<HabitatQuery> logger)
+            [Service] ILogger<HabitatQuery> logger
+        )
         {
             logger.LogInformation($"Getting Habitat by Id {id} (GraphQL)");
             var habitat = habitatRepository.GetHabitatById(id);
@@ -26,7 +27,8 @@ namespace PrimalAPI.GraphQL.Queries
         public HabitatGraphQLDto? GetHabitatByName(
             string name,
             IHabitatRepository habitatRepository,
-            [Service] ILogger<HabitatQuery> logger)
+            [Service] ILogger<HabitatQuery> logger
+        )
         {
             logger.LogInformation($"Getting Habitat by Name {name} (GraphQL)");
             var habitat = habitatRepository.GetHabitatByName(name);
@@ -42,14 +44,17 @@ namespace PrimalAPI.GraphQL.Queries
         [UsePaging]
         public ICollection<HabitatGraphQLDto> GetHabitats(
             IHabitatRepository habitatRepository,
-            [Service] ILogger<HabitatQuery> logger)
+            [Service] ILogger<HabitatQuery> logger
+        )
         {
             logger.LogInformation($"Getting All Habitats (GraphQL)");
             var habitats = habitatRepository.GetAllHabitats();
             var habitatList = new List<HabitatGraphQLDto>();
             foreach (var habitat in habitats)
             {
-                habitatList.Add(new HabitatGraphQLDto(habitat.Id, habitat.Name, habitat.Description));
+                habitatList.Add(
+                    new HabitatGraphQLDto(habitat.Id, habitat.Name, habitat.Description)
+                );
             }
             return habitatList;
         }

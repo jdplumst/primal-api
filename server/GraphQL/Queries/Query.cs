@@ -1,6 +1,4 @@
 ﻿namespace PrimalAPI.GraphQL.Queries
 {
-    public class Query
-    {
-    }
+    public class Query { }
 }

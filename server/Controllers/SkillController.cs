@@ -64,8 +64,10 @@ namespace PrimalAPI.Controllers
         [ProducesResponseType(200, Type = typeof(PageDto<ICollection<SkillDto>>))]
         public IActionResult GetSkills([FromQuery] PaginationQuery paginationQuery)
         {
-            _logger.LogInformation($"Getting all Skills on page {paginationQuery.PageNumber} " +
-            "with {paginationQuery.PageSize} items");
+            _logger.LogInformation(
+                $"Getting all Skills on page {paginationQuery.PageNumber} "
+                    + "with {paginationQuery.PageSize} items"
+            );
             var skills = _skillRepository.GetSkills(paginationQuery);
             var skillDtos = new List<SkillDto>();
             foreach (var skill in skills)

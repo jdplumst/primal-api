@@ -20,13 +20,19 @@ namespace PrimalAPI.Repositories
 
         public Skill? GetSkillByName(string skillName)
         {
-            return _context.Skill.Where(s => s.Name.ToLower() == skillName.ToLower()).FirstOrDefault();
+            return _context
+                .Skill.Where(s => s.Name.ToLower() == skillName.ToLower())
+                .FirstOrDefault();
         }
 
         public ICollection<Skill> GetSkills(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.Skill.OrderBy(s => s.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
+            return _context
+                .Skill.OrderBy(s => s.Id)
+                .Skip(skip)
+                .Take(paginationQuery.PageSize)
+                .ToList();
         }
 
         public int GetSkillCount()

@@ -9,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddGraphQLServer()
+builder
+    .Services.AddGraphQLServer()
     .AddMaxExecutionDepthRule(5, skipIntrospectionFields: true)
     .RegisterService<IPokemonRepository>()
     .RegisterService<ISizeRepository>()
@@ -27,6 +28,7 @@ builder.Services.AddGraphQLServer()
     .AddTypeExtension<EggGroupQuery>();
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -45,7 +47,8 @@ builder.Services.AddCors();
 DotNetEnv.Env.Load();
 
 builder.Services.AddDbContext<DataContext>(options =>
-    options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL")));
+    options.UseNpgsql(Environment.GetEnvironmentVariable("DATABASE_URL"))
+);
 
 var app = builder.Build();
 

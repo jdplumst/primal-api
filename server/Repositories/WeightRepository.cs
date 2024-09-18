@@ -20,13 +20,19 @@ namespace PrimalAPI.Repositories
 
         public Weight? GetWeightByName(string weightName)
         {
-            return _context.Weight.Where(w => w.Name.ToLower() == weightName.ToLower()).FirstOrDefault();
+            return _context
+                .Weight.Where(w => w.Name.ToLower() == weightName.ToLower())
+                .FirstOrDefault();
         }
 
         public ICollection<Weight> GetWeights(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.Weight.OrderBy(w => w.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
+            return _context
+                .Weight.OrderBy(w => w.Id)
+                .Skip(skip)
+                .Take(paginationQuery.PageSize)
+                .ToList();
         }
 
         public int GetWeightCount()
@@ -36,7 +42,9 @@ namespace PrimalAPI.Repositories
 
         public Weight? GetWeightByPokemonId(int pokemonId)
         {
-            return _context.Weight.Where(w => w.Pokemon.Any(p => p.Id == pokemonId)).FirstOrDefault();
+            return _context
+                .Weight.Where(w => w.Pokemon.Any(p => p.Id == pokemonId))
+                .FirstOrDefault();
         }
 
         public ICollection<Weight> GetAllWeights()

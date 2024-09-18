@@ -10,9 +10,7 @@ namespace PrimalAPI.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Description",
-                table: "Proficiency");
+            migrationBuilder.DropColumn(name: "Description", table: "Proficiency");
         }
 
         /// <inheritdoc />
@@ -23,7 +21,8 @@ namespace PrimalAPI.Migrations
                 table: "Proficiency",
                 type: "text",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: ""
+            );
         }
     }
 }

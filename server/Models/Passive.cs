@@ -12,6 +12,6 @@
     public enum PassiveType
     {
         Stat,
-        Ability
+        Ability,
     }
 }

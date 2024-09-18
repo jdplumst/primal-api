@@ -18,7 +18,8 @@ namespace PrimalAPI.Controllers
             IEggGroupRepository eggGroupRepository,
             IPokemonRepository pokemonRepository,
             IResourceMaker resourceMaker,
-            ILogger<EggGroupController> logger)
+            ILogger<EggGroupController> logger
+        )
         {
             _eggGroupRepository = eggGroupRepository;
             _pokemonRepository = pokemonRepository;
@@ -62,8 +63,10 @@ namespace PrimalAPI.Controllers
         [ProducesResponseType(200, Type = typeof(PageDto<ICollection<EggGroupDto>>))]
         public IActionResult GetEggGroups([FromQuery] PaginationQuery paginationQuery)
         {
-            _logger.LogInformation($"Getting all Egg Groups on page {paginationQuery.PageNumber} " +
-            "with {paginationQuery.PageSize} items");
+            _logger.LogInformation(
+                $"Getting all Egg Groups on page {paginationQuery.PageNumber} "
+                    + "with {paginationQuery.PageSize} items"
+            );
             var eggGroups = _eggGroupRepository.GetEggGroups(paginationQuery);
             var eggGroupDtos = new List<EggGroupDto>();
             foreach (var eggGroup in eggGroups)

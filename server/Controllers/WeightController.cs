@@ -18,7 +18,8 @@ namespace PrimalAPI.Controllers
             IWeightRepository weightRepository,
             IPokemonRepository pokemonRepository,
             IResourceMaker resourceMaker,
-            ILogger<WeightController> logger)
+            ILogger<WeightController> logger
+        )
         {
             _weightRepository = weightRepository;
             _pokemonRepository = pokemonRepository;
@@ -62,8 +63,10 @@ namespace PrimalAPI.Controllers
         [ProducesResponseType(200, Type = typeof(PageDto<ICollection<WeightDto>>))]
         public IActionResult GetWeights([FromQuery] PaginationQuery paginationQuery)
         {
-            _logger.LogInformation($"Getting all Weights on page {paginationQuery.PageNumber} " +
-            "with {paginationQuery.PageSize} items");
+            _logger.LogInformation(
+                $"Getting all Weights on page {paginationQuery.PageNumber} "
+                    + "with {paginationQuery.PageSize} items"
+            );
             var weights = _weightRepository.GetWeights(paginationQuery);
             var weightDtos = new List<WeightDto>();
             foreach (var weight in weights)

@@ -5,8 +5,9 @@ namespace PrimalAPI.Models
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        { }
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options) { }
+
         public required DbSet<Pokemon> Pokemon { get; set; }
         public required DbSet<Type> Type { get; set; }
         public required DbSet<Size> Size { get; set; }
@@ -27,7 +28,5 @@ namespace PrimalAPI.Models
                 .Property(p => p.Type)
                 .HasConversion(new EnumToStringConverter<PassiveType>());
         }
-
     }
-
 }

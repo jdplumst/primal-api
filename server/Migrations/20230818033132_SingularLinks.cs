@@ -12,113 +12,125 @@ namespace PrimalAPI.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_DietPokemon_Diet_DietsId",
-                table: "DietPokemon");
+                table: "DietPokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_EggGroupPokemon_EggGroup_EggGroupsId",
-                table: "EggGroupPokemon");
+                table: "EggGroupPokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_HabitatPokemon_Habitat_HabitatsId",
-                table: "HabitatPokemon");
+                table: "HabitatPokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_MovePokemon_Move_MovesId",
-                table: "MovePokemon");
+                table: "MovePokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_MoveProficiency_Move_MovesId",
-                table: "MoveProficiency");
+                table: "MoveProficiency"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_MoveProficiency_Proficiency_ProficienciesId",
-                table: "MoveProficiency");
+                table: "MoveProficiency"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PassivePokemon_Passive_PassivesId",
-                table: "PassivePokemon");
+                table: "PassivePokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PokemonProficiency_Proficiency_ProficienciesId",
-                table: "PokemonProficiency");
+                table: "PokemonProficiency"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PokemonSkill_Skill_SkillsId",
-                table: "PokemonSkill");
+                table: "PokemonSkill"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PokemonType_Type_TypesId",
-                table: "PokemonType");
+                table: "PokemonType"
+            );
 
-            migrationBuilder.RenameColumn(
-                name: "TypesId",
-                table: "PokemonType",
-                newName: "TypeId");
+            migrationBuilder.RenameColumn(name: "TypesId", table: "PokemonType", newName: "TypeId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_PokemonType_TypesId",
                 table: "PokemonType",
-                newName: "IX_PokemonType_TypeId");
+                newName: "IX_PokemonType_TypeId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "SkillsId",
                 table: "PokemonSkill",
-                newName: "SkillId");
+                newName: "SkillId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_PokemonSkill_SkillsId",
                 table: "PokemonSkill",
-                newName: "IX_PokemonSkill_SkillId");
+                newName: "IX_PokemonSkill_SkillId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "ProficienciesId",
                 table: "PokemonProficiency",
-                newName: "ProficiencieId");
+                newName: "ProficiencieId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_PokemonProficiency_ProficienciesId",
                 table: "PokemonProficiency",
-                newName: "IX_PokemonProficiency_ProficiencieId");
+                newName: "IX_PokemonProficiency_ProficiencieId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "PassivesId",
                 table: "PassivePokemon",
-                newName: "PassiveId");
+                newName: "PassiveId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "ProficienciesId",
                 table: "MoveProficiency",
-                newName: "ProficiencyId");
+                newName: "ProficiencyId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "MovesId",
                 table: "MoveProficiency",
-                newName: "MoveId");
+                newName: "MoveId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_MoveProficiency_ProficienciesId",
                 table: "MoveProficiency",
-                newName: "IX_MoveProficiency_ProficiencyId");
+                newName: "IX_MoveProficiency_ProficiencyId"
+            );
 
-            migrationBuilder.RenameColumn(
-                name: "MovesId",
-                table: "MovePokemon",
-                newName: "MoveId");
+            migrationBuilder.RenameColumn(name: "MovesId", table: "MovePokemon", newName: "MoveId");
 
             migrationBuilder.RenameColumn(
                 name: "HabitatsId",
                 table: "HabitatPokemon",
-                newName: "HabitatId");
+                newName: "HabitatId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "EggGroupsId",
                 table: "EggGroupPokemon",
-                newName: "EggGroupId");
+                newName: "EggGroupId"
+            );
 
-            migrationBuilder.RenameColumn(
-                name: "DietsId",
-                table: "DietPokemon",
-                newName: "DietId");
+            migrationBuilder.RenameColumn(name: "DietsId", table: "DietPokemon", newName: "DietId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_DietPokemon_Diet_DietId",
@@ -126,7 +138,8 @@ namespace PrimalAPI.Migrations
                 column: "DietId",
                 principalTable: "Diet",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_EggGroupPokemon_EggGroup_EggGroupId",
@@ -134,7 +147,8 @@ namespace PrimalAPI.Migrations
                 column: "EggGroupId",
                 principalTable: "EggGroup",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_HabitatPokemon_Habitat_HabitatId",
@@ -142,7 +156,8 @@ namespace PrimalAPI.Migrations
                 column: "HabitatId",
                 principalTable: "Habitat",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MovePokemon_Move_MoveId",
@@ -150,7 +165,8 @@ namespace PrimalAPI.Migrations
                 column: "MoveId",
                 principalTable: "Move",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoveProficiency_Move_MoveId",
@@ -158,7 +174,8 @@ namespace PrimalAPI.Migrations
                 column: "MoveId",
                 principalTable: "Move",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoveProficiency_Proficiency_ProficiencyId",
@@ -166,7 +183,8 @@ namespace PrimalAPI.Migrations
                 column: "ProficiencyId",
                 principalTable: "Proficiency",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PassivePokemon_Passive_PassiveId",
@@ -174,7 +192,8 @@ namespace PrimalAPI.Migrations
                 column: "PassiveId",
                 principalTable: "Passive",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PokemonProficiency_Proficiency_ProficiencieId",
@@ -182,7 +201,8 @@ namespace PrimalAPI.Migrations
                 column: "ProficiencieId",
                 principalTable: "Proficiency",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PokemonSkill_Skill_SkillId",
@@ -190,7 +210,8 @@ namespace PrimalAPI.Migrations
                 column: "SkillId",
                 principalTable: "Skill",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PokemonType_Type_TypeId",
@@ -198,7 +219,8 @@ namespace PrimalAPI.Migrations
                 column: "TypeId",
                 principalTable: "Type",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         /// <inheritdoc />
@@ -206,113 +228,125 @@ namespace PrimalAPI.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_DietPokemon_Diet_DietId",
-                table: "DietPokemon");
+                table: "DietPokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_EggGroupPokemon_EggGroup_EggGroupId",
-                table: "EggGroupPokemon");
+                table: "EggGroupPokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_HabitatPokemon_Habitat_HabitatId",
-                table: "HabitatPokemon");
+                table: "HabitatPokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_MovePokemon_Move_MoveId",
-                table: "MovePokemon");
+                table: "MovePokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_MoveProficiency_Move_MoveId",
-                table: "MoveProficiency");
+                table: "MoveProficiency"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_MoveProficiency_Proficiency_ProficiencyId",
-                table: "MoveProficiency");
+                table: "MoveProficiency"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PassivePokemon_Passive_PassiveId",
-                table: "PassivePokemon");
+                table: "PassivePokemon"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PokemonProficiency_Proficiency_ProficiencieId",
-                table: "PokemonProficiency");
+                table: "PokemonProficiency"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PokemonSkill_Skill_SkillId",
-                table: "PokemonSkill");
+                table: "PokemonSkill"
+            );
 
             migrationBuilder.DropForeignKey(
                 name: "FK_PokemonType_Type_TypeId",
-                table: "PokemonType");
+                table: "PokemonType"
+            );
 
-            migrationBuilder.RenameColumn(
-                name: "TypeId",
-                table: "PokemonType",
-                newName: "TypesId");
+            migrationBuilder.RenameColumn(name: "TypeId", table: "PokemonType", newName: "TypesId");
 
             migrationBuilder.RenameIndex(
                 name: "IX_PokemonType_TypeId",
                 table: "PokemonType",
-                newName: "IX_PokemonType_TypesId");
+                newName: "IX_PokemonType_TypesId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "SkillId",
                 table: "PokemonSkill",
-                newName: "SkillsId");
+                newName: "SkillsId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_PokemonSkill_SkillId",
                 table: "PokemonSkill",
-                newName: "IX_PokemonSkill_SkillsId");
+                newName: "IX_PokemonSkill_SkillsId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "ProficiencieId",
                 table: "PokemonProficiency",
-                newName: "ProficienciesId");
+                newName: "ProficienciesId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_PokemonProficiency_ProficiencieId",
                 table: "PokemonProficiency",
-                newName: "IX_PokemonProficiency_ProficienciesId");
+                newName: "IX_PokemonProficiency_ProficienciesId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "PassiveId",
                 table: "PassivePokemon",
-                newName: "PassivesId");
+                newName: "PassivesId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "ProficiencyId",
                 table: "MoveProficiency",
-                newName: "ProficienciesId");
+                newName: "ProficienciesId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "MoveId",
                 table: "MoveProficiency",
-                newName: "MovesId");
+                newName: "MovesId"
+            );
 
             migrationBuilder.RenameIndex(
                 name: "IX_MoveProficiency_ProficiencyId",
                 table: "MoveProficiency",
-                newName: "IX_MoveProficiency_ProficienciesId");
+                newName: "IX_MoveProficiency_ProficienciesId"
+            );
 
-            migrationBuilder.RenameColumn(
-                name: "MoveId",
-                table: "MovePokemon",
-                newName: "MovesId");
+            migrationBuilder.RenameColumn(name: "MoveId", table: "MovePokemon", newName: "MovesId");
 
             migrationBuilder.RenameColumn(
                 name: "HabitatId",
                 table: "HabitatPokemon",
-                newName: "HabitatsId");
+                newName: "HabitatsId"
+            );
 
             migrationBuilder.RenameColumn(
                 name: "EggGroupId",
                 table: "EggGroupPokemon",
-                newName: "EggGroupsId");
+                newName: "EggGroupsId"
+            );
 
-            migrationBuilder.RenameColumn(
-                name: "DietId",
-                table: "DietPokemon",
-                newName: "DietsId");
+            migrationBuilder.RenameColumn(name: "DietId", table: "DietPokemon", newName: "DietsId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_DietPokemon_Diet_DietsId",
@@ -320,7 +354,8 @@ namespace PrimalAPI.Migrations
                 column: "DietsId",
                 principalTable: "Diet",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_EggGroupPokemon_EggGroup_EggGroupsId",
@@ -328,7 +363,8 @@ namespace PrimalAPI.Migrations
                 column: "EggGroupsId",
                 principalTable: "EggGroup",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_HabitatPokemon_Habitat_HabitatsId",
@@ -336,7 +372,8 @@ namespace PrimalAPI.Migrations
                 column: "HabitatsId",
                 principalTable: "Habitat",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MovePokemon_Move_MovesId",
@@ -344,7 +381,8 @@ namespace PrimalAPI.Migrations
                 column: "MovesId",
                 principalTable: "Move",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoveProficiency_Move_MovesId",
@@ -352,7 +390,8 @@ namespace PrimalAPI.Migrations
                 column: "MovesId",
                 principalTable: "Move",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_MoveProficiency_Proficiency_ProficienciesId",
@@ -360,7 +399,8 @@ namespace PrimalAPI.Migrations
                 column: "ProficienciesId",
                 principalTable: "Proficiency",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PassivePokemon_Passive_PassivesId",
@@ -368,7 +408,8 @@ namespace PrimalAPI.Migrations
                 column: "PassivesId",
                 principalTable: "Passive",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PokemonProficiency_Proficiency_ProficienciesId",
@@ -376,7 +417,8 @@ namespace PrimalAPI.Migrations
                 column: "ProficienciesId",
                 principalTable: "Proficiency",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PokemonSkill_Skill_SkillsId",
@@ -384,7 +426,8 @@ namespace PrimalAPI.Migrations
                 column: "SkillsId",
                 principalTable: "Skill",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_PokemonType_Type_TypesId",
@@ -392,7 +435,8 @@ namespace PrimalAPI.Migrations
                 column: "TypesId",
                 principalTable: "Type",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
     }
 }

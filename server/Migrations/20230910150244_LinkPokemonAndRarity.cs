@@ -15,12 +15,14 @@ namespace PrimalAPI.Migrations
                 table: "Pokemon",
                 type: "integer",
                 nullable: false,
-                defaultValue: 1);
+                defaultValue: 1
+            );
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pokemon_RarityId",
                 table: "Pokemon",
-                column: "RarityId");
+                column: "RarityId"
+            );
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Pokemon_Rarity_RarityId",
@@ -28,23 +30,18 @@ namespace PrimalAPI.Migrations
                 column: "RarityId",
                 principalTable: "Rarity",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+            );
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Pokemon_Rarity_RarityId",
-                table: "Pokemon");
+            migrationBuilder.DropForeignKey(name: "FK_Pokemon_Rarity_RarityId", table: "Pokemon");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Pokemon_RarityId",
-                table: "Pokemon");
+            migrationBuilder.DropIndex(name: "IX_Pokemon_RarityId", table: "Pokemon");
 
-            migrationBuilder.DropColumn(
-                name: "RarityId",
-                table: "Pokemon");
+            migrationBuilder.DropColumn(name: "RarityId", table: "Pokemon");
         }
     }
 }

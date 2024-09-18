@@ -8,7 +8,10 @@ namespace PrimalAPI.Repositories
     {
         private readonly DataContext _context;
 
-        public RarityRepository(DataContext context) { _context = context; }
+        public RarityRepository(DataContext context)
+        {
+            _context = context;
+        }
 
         public Rarity? GetRarityById(int rarityId)
         {
@@ -17,13 +20,19 @@ namespace PrimalAPI.Repositories
 
         public Rarity? GetRarityByName(string rarityName)
         {
-            return _context.Rarity.Where(r => r.Name.ToLower() == rarityName.ToLower()).FirstOrDefault();
+            return _context
+                .Rarity.Where(r => r.Name.ToLower() == rarityName.ToLower())
+                .FirstOrDefault();
         }
 
         public ICollection<Rarity> GetRarities(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.Rarity.OrderBy(r => r.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
+            return _context
+                .Rarity.OrderBy(r => r.Id)
+                .Skip(skip)
+                .Take(paginationQuery.PageSize)
+                .ToList();
         }
 
         public int GetRarityCount()
@@ -33,7 +42,9 @@ namespace PrimalAPI.Repositories
 
         public Rarity? GetRarityByPokemonId(int pokemonId)
         {
-            return _context.Rarity.Where(r => r.Pokemon.Any(p => p.Id == pokemonId)).FirstOrDefault();
+            return _context
+                .Rarity.Where(r => r.Pokemon.Any(p => p.Id == pokemonId))
+                .FirstOrDefault();
         }
 
         public ICollection<Rarity> GetAllRarities()

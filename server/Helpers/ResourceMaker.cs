@@ -11,9 +11,14 @@ namespace PrimalAPI.Helpers
             var resources = new List<ResourceDto>();
             foreach (var pokemon in pokemons)
             {
-                var url = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development"
-                  ? Environment.GetEnvironmentVariable("DEV_SERVER_URL") + "/pokemon/" + pokemon.Id
-                  : Environment.GetEnvironmentVariable("PROD_SERVER_URL") + "/pokemon/" + pokemon.Id;
+                var url =
+                    Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development"
+                        ? Environment.GetEnvironmentVariable("DEV_SERVER_URL")
+                            + "/pokemon/"
+                            + pokemon.Id
+                        : Environment.GetEnvironmentVariable("PROD_SERVER_URL")
+                            + "/pokemon/"
+                            + pokemon.Id;
                 resources.Add(new ResourceDto(pokemon.Name, url));
             }
 

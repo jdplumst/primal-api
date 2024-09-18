@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PrimalAPI.Dto;
+using PrimalAPI.Helpers;
 using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
 using PrimalAPI.Queries;
-using PrimalAPI.Helpers;
 
 namespace PrimalAPI.Controllers
 {
@@ -20,7 +20,8 @@ namespace PrimalAPI.Controllers
             ISizeRepository sizeRepository,
             IPokemonRepository pokemonRepository,
             IResourceMaker resourceMaker,
-            ILogger<SizeController> logger)
+            ILogger<SizeController> logger
+        )
         {
             _sizeRepository = sizeRepository;
             _pokemonRepository = pokemonRepository;
@@ -88,8 +89,10 @@ namespace PrimalAPI.Controllers
         [ProducesResponseType(200, Type = typeof(PageDto<ICollection<SizeDto>>))]
         public IActionResult GetSizes([FromQuery] PaginationQuery paginationQuery)
         {
-            _logger.LogInformation($"Getting all Sizes on page {paginationQuery.PageNumber} " +
-            "with {paginationQuery.PageSize} items");
+            _logger.LogInformation(
+                $"Getting all Sizes on page {paginationQuery.PageNumber} "
+                    + "with {paginationQuery.PageSize} items"
+            );
             var sizes = _sizeRepository.GetSizes(paginationQuery);
             var sizeDtos = new List<SizeDto>();
             foreach (var size in sizes)

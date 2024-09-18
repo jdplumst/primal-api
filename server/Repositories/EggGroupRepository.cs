@@ -20,13 +20,19 @@ namespace PrimalAPI.Repositories
 
         public EggGroup? GetEggGroupByName(string eggGroupName)
         {
-            return _context.EggGroup.Where(e => e.Name.ToLower() == eggGroupName.ToLower()).FirstOrDefault();
+            return _context
+                .EggGroup.Where(e => e.Name.ToLower() == eggGroupName.ToLower())
+                .FirstOrDefault();
         }
 
         public ICollection<EggGroup> GetEggGroups(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context.EggGroup.OrderBy(e => e.Id).Skip(skip).Take(paginationQuery.PageSize).ToList();
+            return _context
+                .EggGroup.OrderBy(e => e.Id)
+                .Skip(skip)
+                .Take(paginationQuery.PageSize)
+                .ToList();
         }
 
         public int GetEggGroupCount()

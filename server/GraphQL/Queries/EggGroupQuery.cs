@@ -10,7 +10,8 @@ namespace PrimalAPI.GraphQL.Queries
         public EggGroupGraphQLDto? GetEggGroupById(
             int id,
             IEggGroupRepository eggGroupRepository,
-            [Service] ILogger<EggGroupQuery> logger)
+            [Service] ILogger<EggGroupQuery> logger
+        )
         {
             logger.LogInformation($"Getting Egg Group by Id {id} (GraphQL)");
             var eggGroup = eggGroupRepository.GetEggGroupById(id);
@@ -26,7 +27,8 @@ namespace PrimalAPI.GraphQL.Queries
         public EggGroupGraphQLDto? GetEggGroupByName(
             string name,
             IEggGroupRepository eggGroupRepository,
-            [Service] ILogger<EggGroupQuery> logger)
+            [Service] ILogger<EggGroupQuery> logger
+        )
         {
             logger.LogInformation($"Getting Egg Group by Name {name} (GraphQL)");
             var eggGroup = eggGroupRepository.GetEggGroupByName(name);
@@ -42,7 +44,8 @@ namespace PrimalAPI.GraphQL.Queries
         [UsePaging]
         public ICollection<EggGroupGraphQLDto> GetEggGroups(
             IEggGroupRepository eggGroupRepository,
-            [Service] ILogger<EggGroupQuery> logger)
+            [Service] ILogger<EggGroupQuery> logger
+        )
         {
             logger.LogInformation($"Getting All Egg Groups (GraphQL)");
             var eggGroups = eggGroupRepository.GetAllEggGroups();
