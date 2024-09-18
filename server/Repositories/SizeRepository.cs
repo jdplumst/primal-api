@@ -13,9 +13,20 @@ namespace PrimalAPI.Repositories
             _context = context;
         }
 
-        public Size? GetSizeById(int id)
+        public Size? GetSizeById(int sizeId)
         {
-            return _context.Size.Find(id);
+            Size? size;
+
+            try
+            {
+                size = _context.Size.Where(s => s.Id == sizeId).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Something went wrong.", e);
+            }
+
+            return size;
         }
 
         public Size? GetSizeByName(string name)

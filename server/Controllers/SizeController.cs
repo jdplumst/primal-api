@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PrimalAPI.Dto;
 using PrimalAPI.Interfaces;
+using PrimalAPI.Models;
 using PrimalAPI.Queries;
 
 namespace PrimalAPI.Controllers
@@ -31,12 +32,23 @@ namespace PrimalAPI.Controllers
         public IActionResult GetSizeById(int id)
         {
             _logger.LogInformation($"Getting Size by Id {id}");
-            var size = _sizeRepository.GetSizeById(id);
+
+            Size? size;
+            try
+            {
+                size = _sizeRepository.GetSizeById(id);
+            }
+            catch (Exception e)
+            {
+                return Problem("Something went wrong.");
+            }
+
             if (size == null)
             {
                 _logger.LogWarning($"Size with Id {id} was not found");
                 return NotFound();
             }
+
             var pokemons = _pokemonRepository.GetPokemonBySizeId(id);
             var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
             return Ok(new SizeDto(id, size.Name, size.Space, pokemonList));
