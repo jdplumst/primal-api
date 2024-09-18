@@ -59,7 +59,14 @@ namespace PrimalAPI.Repositories
 
         public int GetSizeCount()
         {
-            return _context.Size.Count();
+            try
+            {
+                return _context.Size.Count();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
 
         public Size? GetSizeByPokemonId(int pokemonId)

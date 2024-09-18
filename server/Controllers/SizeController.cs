@@ -43,7 +43,7 @@ namespace PrimalAPI.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogInformation(Constants.DatabaseErrorMsg, e);
+                _logger.LogError(Constants.DatabaseErrorMsg, e);
                 return Problem(Constants.DatabaseErrorMsg);
             }
 
@@ -72,7 +72,7 @@ namespace PrimalAPI.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogInformation(Constants.DatabaseErrorMsg, e);
+                _logger.LogError(Constants.DatabaseErrorMsg, e);
                 return Problem(Constants.DatabaseErrorMsg);
             }
             if (size == null)
@@ -102,7 +102,7 @@ namespace PrimalAPI.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogWarning(Constants.DatabaseErrorMsg, e);
+                _logger.LogError(Constants.DatabaseErrorMsg, e);
                 return Problem(Constants.DatabaseErrorMsg);
             }
 
@@ -115,8 +115,19 @@ namespace PrimalAPI.Controllers
                 sizeDtos.Add(new SizeDto(size.Id, size.Name, size.Space, pokemonList));
             }
 
-            var info = new InfoDto(paginationQuery, _sizeRepository.GetSizeCount());
+            InfoDto info;
+            try
+            {
+                info = new InfoDto(paginationQuery, _sizeRepository.GetSizeCount());
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(Constants.DatabaseErrorMsg, e);
+                return Problem(Constants.DatabaseErrorMsg);
+            }
+
             var pageDto = new PageDto<ICollection<SizeDto>>(sizeDtos, info);
+
             return Ok(pageDto);
         }
     }
