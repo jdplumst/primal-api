@@ -16,27 +16,21 @@ namespace PrimalAPI.Repositories
 
         public Size? GetSizeById(int sizeId)
         {
-            Size? size;
-
             try
             {
-                size = _context.Size.Where(s => s.Id == sizeId).FirstOrDefault();
+                return _context.Size.Where(s => s.Id == sizeId).FirstOrDefault();
             }
             catch (Exception e)
             {
                 throw new Exception(Constants.DatabaseErrorMsg, e);
             }
-
-            return size;
         }
 
         public Size? GetSizeByName(string name)
         {
-            Size? size;
-
             try
             {
-                size = _context
+                return _context
                     .Size.Where(s => s.Name.ToLower() == name.ToLower())
                     .FirstOrDefault();
             }
@@ -44,18 +38,23 @@ namespace PrimalAPI.Repositories
             {
                 throw new Exception(Constants.DatabaseErrorMsg, e);
             }
-
-            return size;
         }
 
         public ICollection<Size> GetSizes(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context
-                .Size.OrderBy(s => s.Id)
-                .Skip(skip)
-                .Take(paginationQuery.PageSize)
-                .ToList();
+            try
+            {
+                return _context
+                    .Size.OrderBy(s => s.Id)
+                    .Skip(skip)
+                    .Take(paginationQuery.PageSize)
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
 
         public int GetSizeCount()

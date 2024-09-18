@@ -93,14 +93,28 @@ namespace PrimalAPI.Controllers
                 $"Getting all Sizes on page {paginationQuery.PageNumber} "
                     + "with {paginationQuery.PageSize} items"
             );
-            var sizes = _sizeRepository.GetSizes(paginationQuery);
+
+            ICollection<Size> sizes;
+
+            try
+            {
+                sizes = _sizeRepository.GetSizes(paginationQuery);
+            }
+            catch (Exception e)
+            {
+                _logger.LogWarning(Constants.DatabaseErrorMsg, e);
+                return Problem(Constants.DatabaseErrorMsg);
+            }
+
             var sizeDtos = new List<SizeDto>();
+
             foreach (var size in sizes)
             {
                 var pokemons = _pokemonRepository.GetPokemonBySizeId(size.Id);
                 var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
                 sizeDtos.Add(new SizeDto(size.Id, size.Name, size.Space, pokemonList));
             }
+
             var info = new InfoDto(paginationQuery, _sizeRepository.GetSizeCount());
             var pageDto = new PageDto<ICollection<SizeDto>>(sizeDtos, info);
             return Ok(pageDto);
