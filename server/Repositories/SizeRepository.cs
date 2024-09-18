@@ -1,6 +1,7 @@
 ﻿using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
 using PrimalAPI.Queries;
+using PrimalAPI.Helpers;
 
 namespace PrimalAPI.Repositories
 {
@@ -23,7 +24,7 @@ namespace PrimalAPI.Repositories
             }
             catch (Exception e)
             {
-                throw new Exception("Something went wrong.", e);
+                throw new Exception(Constants.DatabaseErrorMsg, e);
             }
 
             return size;
@@ -31,7 +32,18 @@ namespace PrimalAPI.Repositories
 
         public Size? GetSizeByName(string name)
         {
-            return _context.Size.Where(s => s.Name.ToLower() == name.ToLower()).FirstOrDefault();
+            Size? size;
+
+            try
+            {
+                size = _context.Size.Where(s => s.Name.ToLower() == name.ToLower()).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
+
+            return size;
         }
 
         public ICollection<Size> GetSizes(PaginationQuery paginationQuery)

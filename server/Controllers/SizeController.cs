@@ -3,6 +3,7 @@ using PrimalAPI.Dto;
 using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
 using PrimalAPI.Queries;
+using PrimalAPI.Helpers;
 
 namespace PrimalAPI.Controllers
 {
@@ -34,13 +35,15 @@ namespace PrimalAPI.Controllers
             _logger.LogInformation($"Getting Size by Id {id}");
 
             Size? size;
+
             try
             {
                 size = _sizeRepository.GetSizeById(id);
             }
             catch (Exception e)
             {
-                return Problem("Something went wrong.");
+                _logger.LogInformation(Constants.DatabaseErrorMsg, e);
+                return Problem(Constants.DatabaseErrorMsg);
             }
 
             if (size == null)
@@ -59,7 +62,18 @@ namespace PrimalAPI.Controllers
         public IActionResult GetSizeByName(string name)
         {
             _logger.LogInformation($"Getting Size by Name {name}");
-            var size = _sizeRepository.GetSizeByName(name);
+
+            Size? size;
+
+            try
+            {
+                size = _sizeRepository.GetSizeByName(name);
+            }
+            catch (Exception e)
+            {
+                _logger.LogInformation(Constants.DatabaseErrorMsg, e);
+                return Problem(Constants.DatabaseErrorMsg);
+            }
             if (size == null)
             {
                 _logger.LogWarning($"Size with name {name} was not found");
