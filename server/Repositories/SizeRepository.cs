@@ -85,7 +85,14 @@ namespace PrimalAPI.Repositories
 
         public ICollection<Size> GetAllSizes()
         {
-            return _context.Size.OrderBy(s => s.Id).ToList();
+            try
+            {
+                return _context.Size.OrderBy(s => s.Id).ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
     }
 }
