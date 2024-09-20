@@ -71,7 +71,16 @@ namespace PrimalAPI.Repositories
 
         public Size? GetSizeByPokemonId(int pokemonId)
         {
-            return _context.Size.Where(s => s.Pokemon.Any(p => p.Id == pokemonId)).FirstOrDefault();
+            try
+            {
+                return _context
+                    .Size.Where(s => s.Pokemon.Any(p => p.Id == pokemonId))
+                    .FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
 
         public ICollection<Size> GetAllSizes()
