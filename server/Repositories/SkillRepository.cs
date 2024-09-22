@@ -43,11 +43,18 @@ namespace PrimalAPI.Repositories
         public ICollection<Skill> GetSkills(PaginationQuery paginationQuery)
         {
             var skip = (paginationQuery.PageNumber - 1) * paginationQuery.PageSize;
-            return _context
-                .Skill.OrderBy(s => s.Id)
-                .Skip(skip)
-                .Take(paginationQuery.PageSize)
-                .ToList();
+            try
+            {
+                return _context
+                    .Skill.OrderBy(s => s.Id)
+                    .Skip(skip)
+                    .Take(paginationQuery.PageSize)
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
 
         public int GetSkillCount()

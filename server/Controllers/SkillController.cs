@@ -91,7 +91,18 @@ namespace PrimalAPI.Controllers
                 $"Getting all Skills on page {paginationQuery.PageNumber} "
                     + "with {paginationQuery.PageSize} items"
             );
-            var skills = _skillRepository.GetSkills(paginationQuery);
+
+            ICollection<Skill> skills;
+            try
+            {
+                skills = _skillRepository.GetSkills(paginationQuery);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(Constants.DatabaseErrorMsg, e);
+                return Problem(Constants.DatabaseErrorMsg);
+            }
+
             var skillDtos = new List<SkillDto>();
             foreach (var skill in skills)
             {
