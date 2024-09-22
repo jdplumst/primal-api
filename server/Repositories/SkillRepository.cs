@@ -28,9 +28,16 @@ namespace PrimalAPI.Repositories
 
         public Skill? GetSkillByName(string skillName)
         {
-            return _context
-                .Skill.Where(s => s.Name.ToLower() == skillName.ToLower())
-                .FirstOrDefault();
+            try
+            {
+                return _context
+                    .Skill.Where(s => s.Name.ToLower() == skillName.ToLower())
+                    .FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
 
         public ICollection<Skill> GetSkills(PaginationQuery paginationQuery)

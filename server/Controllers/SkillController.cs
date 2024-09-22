@@ -61,7 +61,18 @@ namespace PrimalAPI.Controllers
         public IActionResult GetSkillByName(string name)
         {
             _logger.LogInformation($"Getting Skill by Name {name}");
-            var skill = _skillRepository.GetSkillByName(name);
+
+            Skill? skill;
+            try
+            {
+                skill = _skillRepository.GetSkillByName(name);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(Constants.DatabaseErrorMsg, e);
+                return Problem(Constants.DatabaseErrorMsg);
+            }
+
             if (skill == null)
             {
                 _logger.LogWarning($"Skill with Name {name} was not found");
