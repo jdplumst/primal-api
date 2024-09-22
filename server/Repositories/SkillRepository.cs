@@ -1,3 +1,4 @@
+using PrimalAPI.Helpers;
 using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
 using PrimalAPI.Queries;
@@ -15,7 +16,14 @@ namespace PrimalAPI.Repositories
 
         public Skill? GetSkillById(int skillId)
         {
-            return _context.Skill.Where(s => s.Id == skillId).FirstOrDefault();
+            try
+            {
+                return _context.Skill.Where(s => s.Id == skillId).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
 
         public Skill? GetSkillByName(string skillName)

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PrimalAPI.Dto;
+using PrimalAPI.Helpers;
 using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
 using PrimalAPI.Queries;
@@ -33,7 +34,18 @@ namespace PrimalAPI.Controllers
         public IActionResult GetSkillById(int id)
         {
             _logger.LogInformation($"Getting Skill by Id {id}");
-            var skill = _skillRepository.GetSkillById(id);
+
+            Skill? skill;
+            try
+            {
+                skill = _skillRepository.GetSkillById(id);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(Constants.DatabaseErrorMsg, e);
+                return Problem(Constants.DatabaseErrorMsg);
+            }
+
             if (skill == null)
             {
                 _logger.LogWarning($"Skill with Id {id} was not found");
