@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PrimalAPI.Dto;
+using PrimalAPI.Helpers;
 using PrimalAPI.Interfaces;
+using PrimalAPI.Models;
 using PrimalAPI.Queries;
 
 namespace PrimalAPI.Controllers
@@ -32,7 +34,18 @@ namespace PrimalAPI.Controllers
         public IActionResult GetWeightById(int id)
         {
             _logger.LogInformation($"Getting Weight by Id {id}");
-            var weight = _weightRepository.GetWeightById(id);
+
+            Weight? weight;
+            try
+            {
+                weight = _weightRepository.GetWeightById(id);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(Constants.DatabaseErrorMsg, e);
+                return Problem(Constants.DatabaseErrorMsg);
+            }
+
             if (weight == null)
             {
                 _logger.LogWarning($"Weight with Id {id} was not found");

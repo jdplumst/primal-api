@@ -1,4 +1,5 @@
-﻿using PrimalAPI.Interfaces;
+﻿using PrimalAPI.Helpers;
+using PrimalAPI.Interfaces;
 using PrimalAPI.Models;
 using PrimalAPI.Queries;
 
@@ -15,7 +16,14 @@ namespace PrimalAPI.Repositories
 
         public Weight? GetWeightById(int weightId)
         {
-            return _context.Weight.Where(w => w.Id == weightId).FirstOrDefault();
+            try
+            {
+                return _context.Weight.Where(w => w.Id == weightId).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
 
         public Weight? GetWeightByName(string weightName)
