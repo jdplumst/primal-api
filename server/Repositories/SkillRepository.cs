@@ -59,7 +59,14 @@ namespace PrimalAPI.Repositories
 
         public int GetSkillCount()
         {
-            return _context.Skill.Count();
+            try
+            {
+                return _context.Skill.Count();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
 
         public ICollection<Skill> GetSkillByPokemonId(int pokemonId)

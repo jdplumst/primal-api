@@ -110,7 +110,18 @@ namespace PrimalAPI.Controllers
                 var pokemonList = _resourceMaker.CreatePokemonResources(pokemons);
                 skillDtos.Add(new SkillDto(skill.Id, skill.Name, skill.Description, pokemonList));
             }
-            var info = new InfoDto(paginationQuery, _skillRepository.GetSkillCount());
+
+            InfoDto info;
+            try
+            {
+                info = new InfoDto(paginationQuery, _skillRepository.GetSkillCount());
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(Constants.DatabaseErrorMsg, e);
+                return Problem(Constants.DatabaseErrorMsg);
+            }
+
             var pageDto = new PageDto<ICollection<SkillDto>>(skillDtos, info);
             return Ok(pageDto);
         }
