@@ -83,7 +83,14 @@ namespace PrimalAPI.Repositories
 
         public ICollection<Skill> GetAllSkills()
         {
-            return _context.Skill.OrderBy(s => s.Id).ToList();
+            try
+            {
+                return _context.Skill.OrderBy(s => s.Id).ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
     }
 }
