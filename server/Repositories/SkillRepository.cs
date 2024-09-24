@@ -71,7 +71,14 @@ namespace PrimalAPI.Repositories
 
         public ICollection<Skill> GetSkillByPokemonId(int pokemonId)
         {
-            return _context.Skill.Where(s => s.Pokemon.Any(p => p.Id == pokemonId)).ToList();
+            try
+            {
+                return _context.Skill.Where(s => s.Pokemon.Any(p => p.Id == pokemonId)).ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(Constants.DatabaseErrorMsg, e);
+            }
         }
 
         public ICollection<Skill> GetAllSkills()
